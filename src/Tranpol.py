@@ -347,12 +347,22 @@ def UR_test(a,b,v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag,theta,X,eta_0):
     I,Q,U,V = UR(a,b,v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag,theta,X,eta_0)
     newfig = plt.figure()
     plt.plot(v,I,label='I')
+    plt.legend()
+    plt.savefig('UR_Solutions_I')
+    plt.show()
     plt.plot(v,Q,label='Q')
+    plt.legend()
+    plt.savefig('UR_Solutions_I')
+    plt.show()
     plt.plot(v,U,label='U')
+    plt.legend()
+    plt.savefig('UR_Solutions_I')
+    plt.show()
     plt.plot(v,V,label='V')
     plt.legend()
-    plt.savefig('UR_solutions.png')
+    plt.savefig('UR_Solutions_I')
     plt.show()
+    
 
 if __name__ == '__main__' :
     import math as m
