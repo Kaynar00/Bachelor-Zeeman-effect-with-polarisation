@@ -52,10 +52,10 @@ def v_A(l_0,v_LOS,delta_l):
     c=3e8 #m/s
     return (l_0*v_LOS)/(c*delta_l)
 
-def v_B(l_0,delta_l,B,S_i,L_i,J_i,S_f,L_f,J_f):
-    g_i = g(S_i,L_i,J_i)
-    g_f = g(S_f,L_f,J_f)
-    return (4.67e-13)*((l_0**2)/(delta_l))*
+def v_B(l_0,delta_l,B,S_l,L_l,J_l,S_u,L_u,J_u,M_l,M_u):
+    g_l = g(S_l,L_l,J_l)
+    g_u = g(S_u,L_u,J_u)
+    return 4.67e-13*(l_0**2)*B*((g_l*M_l-g_u*M_u)/delta_l)
 
 def zcomp(M,Mp,J,Jp):
     '''
@@ -354,8 +354,7 @@ def UR_test(a,b,v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag,theta,X,eta_0):
     plt.savefig('UR_solutions.png')
     plt.show()
 
-if __name__ == '__main__' : 
-    f = 1+1 
+if __name__ == '__main__' :  
     nu_start = 0
     nu_stop = lv_convert(6000e-10)
     nu_step = 1e10 
