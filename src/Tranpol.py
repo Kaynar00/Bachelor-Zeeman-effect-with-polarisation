@@ -354,7 +354,8 @@ def UR_test(a,b,v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag,theta,X,eta_0):
     plt.savefig('UR_solutions.png')
     plt.show()
 
-if __name__ == '__main__' :  
+if __name__ == '__main__' : 
+    f = 1+1 
     nu_start = 0
     nu_stop = lv_convert(6000e-10)
     nu_step = 1e10 
