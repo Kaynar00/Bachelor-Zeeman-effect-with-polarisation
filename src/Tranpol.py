@@ -352,15 +352,15 @@ def UR_test(a,b,v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag,theta,X,eta_0):
     plt.show()
     plt.plot(v,Q,label='Q')
     plt.legend()
-    plt.savefig('UR_Solutions_I')
+    plt.savefig('UR_Solutions_Q')
     plt.show()
     plt.plot(v,U,label='U')
     plt.legend()
-    plt.savefig('UR_Solutions_I')
+    plt.savefig('UR_Solutions_U')
     plt.show()
     plt.plot(v,V,label='V')
     plt.legend()
-    plt.savefig('UR_Solutions_I')
+    plt.savefig('UR_Solutions_V')
     plt.show()
     
 
