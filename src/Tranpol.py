@@ -354,31 +354,39 @@ def UR_test(a,b,v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag,theta,X,eta_0):
     plt.savefig('UR_solutions.png')
     plt.show()
 
-if __name__ == '__main__' :  
-    nu_start = 0
-    nu_stop = lv_convert(6000e-10)
-    nu_step = 1e10 
+if __name__ == '__main__' :
+    import math as m
 
-    tau1=1
-    tau2=2
+    #nu_start = 0
+    #nu_stop = lv_convert(6000e-10)
+    #nu_step = 1e10 
 
-    T1 = 5700
-    T2 = 6000
+    #tau1=1
+    #tau2=2
+
+    #T1 = 5700
+    #T2 = 6000
 
     a = 0.8
     b = 0.2
     
-    eta, rho, sigma_b, pi, sigma_r = profiles(500,550,450,1,1,1,2,1,2,30)
-    print(eta)
-    print(rho)
+    #eta, rho, sigma_b, pi, sigma_r = profiles(500,550,450,1,1,1,2,1,2,30)
+    #print(eta)
+    #print(rho)
 
-    profilestest(np.arange(100,900),550,450,1,1,1,2,1,2,30)
+    #profilestest(np.arange(100,900),550,450,1,1,1,2,1,2,30)
 
-    profilessumtest(np.arange(nu_start,nu_stop,nu_step),lv_convert(300e-9),lv_convert(5247.1e-10),2,3,2,2,2,3,30j)
+    #profilessumtest(np.arange(nu_start,nu_stop,nu_step),lv_convert(300e-9),lv_convert(5247.1e-10),2,3,2,2,2,3,30j)
 
-    trcoefstest(np.arange(nu_start,nu_stop,nu_step),lv_convert(300e-9),lv_convert(5247.1e-10),2,3,2,2,2,3,30j,m.pi/4,m.pi/4,1)
+    #trcoefstest(np.arange(nu_start,nu_stop,nu_step),lv_convert(300e-9),lv_convert(5247.1e-10),2,3,2,2,2,3,30j,m.pi/4,m.pi/4,1)
 
-    UR_test(a,b,np.arange(nu_start,nu_stop,nu_step),lv_convert(300e-9),lv_convert(5247.1e-10),2,3,2,2,2,3,30j,m.pi/4,m.pi/4,1)
+    v = v(np.arange(6301.5-1,6301.5+1,0.1),6301.5,0.1)
+
+    v_A = v_A(6301.5,10e3,0.1)
+
+    v_B = v_B(6301.5,0.1,1000e-4,2,2,2,3,2,3,2,3)
+
+    UR_test(a,b,v,v_A,v_B,2,3,2,2,2,3,0.01,m.radians(30),m.radians(45),10)
 
     #z = zcomp(0,1,2,1)
     #print(z),30
