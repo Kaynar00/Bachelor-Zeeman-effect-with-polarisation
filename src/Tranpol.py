@@ -330,7 +330,7 @@ def trcoefs(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0):
     '''
     eta_b, eta_p, eta_r, rho_b, rho_p, rho_r = profilessum(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag)
     hI = 1+eta_0*0.5*(eta_p*m.sin(theta)**2+((eta_b+eta_r)/2)*(1+m.cos(theta)**2))
-    hQ = eta_0**0.5*(eta_p-((eta_b+eta_r)/2))*m.sin(theta)**2*m.cos(2*X)
+    hQ = eta_0*0.5*(eta_p-((eta_b+eta_r)/2))*m.sin(theta)**2*m.cos(2*X)
     hU = eta_0*0.5*(eta_p-((eta_b+eta_r)/2))*m.sin(theta)**2*m.sin(2*X)
     hV = eta_0*0.5*(eta_r-eta_b)*m.cos(theta)
     rQ = eta_0*0.5*(rho_p-((rho_b+rho_r)/2))*m.sin(theta)**2*m.cos(2*X)
