@@ -274,14 +274,14 @@ def profilessum(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag):
                 g_u = g(S_u,L_u,J_u)
                 eta, rho, sigma_b, pi, sigma_r = profiles(v,v_A,v_B,g_l,g_u,l,u,J_l,J_u,aimag)
                 if sigma_b == True:
-                    eta_b += eta
-                    rho_b += rho
+                    eta_b += eta/np.sqrt(np.pi)
+                    rho_b += rho/np.sqrt(np.pi)
                 elif pi == True:
-                    eta_p += eta
-                    rho_p += rho
+                    eta_p += eta/np.sqrt(np.pi)
+                    rho_p += rho/np.sqrt(np.pi)
                 elif sigma_r == True:
-                    eta_r += eta
-                    rho_r += rho
+                    eta_r += eta/np.sqrt(np.pi)
+                    rho_r += rho/np.sqrt(np.pi)
     return eta_b, eta_p, eta_r, rho_b, rho_p, rho_r
 
 def profilessumtest(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag):
