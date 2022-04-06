@@ -445,7 +445,7 @@ if __name__ == '__main__' :
 
     #trcoefstest(np.arange(nu_start,nu_stop,nu_step),lv_convert(300e-9),lv_convert(5247.1e-10),2,3,2,2,2,3,30j,m.pi/4,m.pi/4,1)
 
-    v = v(np.arange(6301.5-1,6301.5+1,0.1),6301.5,0.1)
+    v = v(np.arange(6301.5-1,6301.5+1,0.01),6301.5,0.1)
 
     v_A = v_A(6301.5,10e3,0.1)
 
