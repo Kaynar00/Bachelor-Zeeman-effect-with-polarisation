@@ -390,7 +390,7 @@ def UR(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0):
     '''
     hI, hQ, hU, hV, rQ, rU, rV = trcoefs(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0)
     Pi = hQ*rQ + hU*rU + hV*rV
-    delta = (hI**2)*((hI**2)-(hQ**2)-(hV**2)+(rQ**2)+(rU**2)+(rV**2))-Pi**2
+    delta = (hI**2)*((hI**2)-(hQ**2)-(hU**2)-(hV**2)+(rQ**2)+(rU**2)+(rV**2))-Pi**2
     I = b+(delta**-1)*(hI*((hI**2)+(rQ**2)+(rU**2)+(rV**2)))*a
     Q = -(delta**-1)*((hI**2)*hQ+hI*(hV*rU-hU*rV)+rQ*Pi)*a
     U = -(delta**-1)*((hI**2)*hU+hI*(hQ*rV-hV*rQ)+rU*Pi)*a
