@@ -197,7 +197,7 @@ def Zeemansplittest(J_l,J_u,L_l,L_u,S_l,S_u):
             plt.bar(split[i],comp[i],width = 0.1,color = 'g')
         elif sigma_r[i] == True:
             plt.bar(split[i],comp[i],width = 0.1,color = 'r')
-    plt.xlabel('Lambda(g_l*M_l-g_u*M_u')
+    plt.xlabel('Lambda(g_l*M_l-g_u*M_u)')
     plt.ylabel('Strength')
     plt.savefig('Zeemansplit.pdf')
     plt.show()
@@ -461,6 +461,8 @@ if __name__ == '__main__' :
     v_B = v_B(6301.5,0.1,1000,2,2,2,3,2,3,2,3)
 
     UR_test(a,b,v,v_A,v_B,2,3,2,2,2,3,0.01,m.radians(30),m.radians(45),10)
+
+    Zeemansplittest(2,3,2,2,2,3)
 
     #z = zcomp(0,1,2,1)
     #print(z),30
