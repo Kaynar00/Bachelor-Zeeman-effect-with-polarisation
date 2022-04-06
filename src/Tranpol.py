@@ -323,8 +323,8 @@ def trcoefs(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0):
     S_l: the spin quantum number for lower state
     S_u: the spin quantum number for upper state
     aimag: the damping constant
-    theta: an angle for polarisation
-    X: an angle for polarisation
+    theta: an angle for the inclination of the magnetic field
+    X: an angle for the inclination of the magnetic field
     eta_0: a normalization constant
     Caclulates the transition coefficients
     '''
@@ -350,8 +350,8 @@ def trcoefstest(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0):
     S_l: the spin quantum number for lower state
     S_u: the spin quantum number for upper state
     aimag: the damping constatn times the imaginary number "j"
-    theta: an angle for polarisation
-    X: an angle for polarisation
+    theta: an angle for the inclination of the magnetic field
+    X: an angle for the inclination of the magnetic field
     eta_0: a normalization constant
     Plots the transition coefficients depending on different reduced frequency
     '''
@@ -383,8 +383,8 @@ def UR(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0):
     S_l: the spin quantum number for lower state
     S_u: the spin quantum number for upper state
     aimag: the damping constant times the imaginary number "j"
-    theta: an angle for polarisation
-    X: an angle for polarisation
+    theta: an angle for the inclination of the magnetic field
+    X: an angle for the inclination of the magnetic field
     eta_0: a normalization constant
     Calculates the intensities for the different stokes parameters with the Unno-Rachkovsky solutions.
     '''
@@ -411,8 +411,8 @@ def UR_test(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0):
     S_l: the spin quantum number for lower state
     S_u: the spin quantum number for upper state
     aimag: the damping constant times the imaginary number "j"
-    theta: an angle for polarisation
-    X: an angle for polarisation
+    theta: an angle for the inclination of the magnetic field
+    X: an angle for the inclination of the magnetic field
     eta_0: a normalization constant
     Plots the intensities for the different stokes parameters with the Unno-Rachkovsky solutions.
     '''
