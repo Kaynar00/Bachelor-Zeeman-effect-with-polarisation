@@ -197,6 +197,8 @@ def Zeemansplittest(J_l,J_u,L_l,L_u,S_l,S_u):
             plt.bar(split[i],comp[i],width = 0.1,color = 'g')
         elif sigma_r[i] == True:
             plt.bar(split[i],comp[i],width = 0.1,color = 'r')
+    plt.xlabel('Lambda(g_l*M_l-g_u*M_u')
+    plt.ylabel('Strength')
     plt.savefig('Zeemansplit.pdf')
     plt.show()
 
@@ -369,7 +371,7 @@ def trcoefstest(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
     plt.savefig('transfer_coefficients.pdf')
     plt.show()
 
-def UR(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
+def UR(a,b,v,v_A,v_B,S_l,L_l,J_l,S_u,L_u,J_u,aimag,theta,Xi,eta_0):
     '''
     a: the slope of the planckfunction
     b: value of planck function when optical depth is zero
@@ -397,7 +399,7 @@ def UR(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
     V = -(delta**-1)*((hI**2)*hV+hI*(hU*rQ-hQ*rU)+rV*Pi)*a
     return I,Q,U,V
 
-def UR_test(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
+def UR_test(a,b,v,v_A,v_B,S_l,L_l,J_l,S_u,L_u,J_u,aimag,theta,Xi,eta_0):
     '''
     a: the slope of the planckfunction
     b: value of planck function when optical depth is zero
