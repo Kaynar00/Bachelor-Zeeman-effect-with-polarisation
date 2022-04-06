@@ -197,7 +197,7 @@ def Zeemansplittest(J_l,J_u,L_l,L_u,S_l,S_u):
             plt.bar(split[i],comp[i],width = 0.1,color = 'g')
         elif sigma_r[i] == True:
             plt.bar(split[i],comp[i],width = 0.1,color = 'r')
-    plt.savefig('Zeemansplit.png')
+    plt.savefig('Zeemansplit.pdf')
     plt.show()
 
 def profiles(v,v_A,v_B,g_l,g_u,M_l,M_u,J_l,J_u,aimag):
@@ -240,7 +240,7 @@ def profilestest(v,v_A,v_B,g_l,g_u,M_l,M_u,J_l,J_u,aimag):
     plt.plot(v,rho,label='rho')
     plt.xlabel('v')
     plt.legend()
-    plt.savefig('profiles.png')
+    plt.savefig('profiles.pdf')
     plt.show()
 
 def profilessum(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag):
@@ -308,7 +308,7 @@ def profilessumtest(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag):
     plt.plot(v,rho_r,label='rho_r')
     plt.xlabel('v')
     plt.legend()
-    plt.savefig('profilessum.png')
+    plt.savefig('profilessum.pdf')
     plt.show()
 
 def trcoefs(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
@@ -366,7 +366,7 @@ def trcoefstest(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
     plt.plot(v,rV,label='rV')
     plt.xlabel('v')
     plt.legend()
-    plt.savefig('transfer_coefficients.png')
+    plt.savefig('transfer_coefficients.pdf')
     plt.show()
 
 def UR(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
@@ -432,7 +432,7 @@ def UR_test(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
     plt.show()
     plt.plot(v,V,label='V')
     plt.legend()
-    plt.savefig('UR_Solutions_V')
+    plt.savefig('UR_Solutions_V.pdf')
     plt.show()
     
 
