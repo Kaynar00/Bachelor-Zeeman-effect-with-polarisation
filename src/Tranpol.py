@@ -419,25 +419,15 @@ def UR_test(a,b,v,v_A,v_B,S_l,L_l,J_l,S_u,L_u,J_u,aimag,theta,Xi,eta_0):
     Plots the intensities for the different stokes parameters with the Unno-Rachkovsky solutions.
     '''
     I,Q,U,V = UR(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0)
+    Stokes = [I,Q,U,V]
+    Stokeslabel = ['I','Q','U','V']
     newfig = plt.figure()
-    plt.plot(v,I,label='I')
-    plt.legend()
-    plt.savefig('UR_Solutions_I.pdf')
-    plt.show()
-    plt.plot(v,Q,label='Q')
-    plt.legend()
-    plt.savefig('UR_Solutions_Q.pdf')
-    plt.show()
-    plt.plot(v,U,label='U')
-    plt.legend()
-    plt.savefig('UR_Solutions_U.pdf')
-    plt.show()
-    plt.plot(v,V,label='V')
-    plt.legend()
-    plt.savefig('UR_Solutions_V.pdf')
+    for i in range(4):
+        plt.subplot(2,2,i+1)
+        plt.plot(v,Stokes[i],label=Stokeslabel[i])
+    plt.savefig('UR_sol.pdf')
     plt.show()
     
-
 if __name__ == '__main__' :
     import math as m
     
