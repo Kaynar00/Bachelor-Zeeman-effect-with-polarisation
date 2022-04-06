@@ -76,7 +76,7 @@ def v_B(l_0,delta_l,B,S_l,L_l,J_l,S_u,L_u,J_u,M_l,M_u):
     g_u = g(S_u,L_u,J_u)
     return 4.67e-13*(l_0**2)*B*((g_l*M_l-g_u*M_u)/delta_l)
 
-def zcomp(M,Mp,J,Jp):
+def zcomp(M,Mp,J,Jp,verbose=False):
     '''
     M: Initial magnetic quantum number
     Mp: Final magnetic quantum number
@@ -89,47 +89,56 @@ def zcomp(M,Mp,J,Jp):
     sigma_r = False
     if (Mp-M) == 1 and (Jp-J) == 1:
         z = (3*(J+M+1)*(J+M+2))/(2*(J+1)*(2*J+1)*(2*J+3))
-        print('sigma_b state')
+        if verbose == True:
+            print('sigma_b state')
         sigma_b = True
         return z, sigma_b, pi, sigma_r
     elif (Mp-M) == 1 and (Jp-J) == 0:
         z = (3*(J-M)*(J+M+1))/(2*J*(J+1)*(2*J+1))
-        print('sigma_b state')
+        if verbose == True:
+            print('sigma_b state')
         sigma_b = True
         return z, sigma_b, pi, sigma_r
     elif (Mp-M) == 1 and (Jp-J) == -1:
         z = (3*(J-M)*(J-M-1))/(2*J*(2*J-1)*(2*J+1))
-        print('sigma_b state')
+        if verbose == True:
+            print('sigma_b state')
         sigma_b = True
         return z, sigma_b, pi, sigma_r
     elif (Mp-M) == 0 and (Jp-J) == 1:
         z = (3*(J-M+1)*(J+M+1))/((J+1)*(2*J+1)*(2*J+3))
-        print('pi state')
+        if verbose == True:
+            print('pi state')
         pi = True
         return z, sigma_b, pi, sigma_r
     elif (Mp-M) == 0 and (Jp-J) == 0:
         z = (3*M**2)/(J*(J+1)*(2*J+1))
-        print('pi state')
+        if verbose == True:
+            print('pi state')
         pi = True
         return z, sigma_b, pi, sigma_r
     elif (Mp-M) == 0 and (Jp-J) == -1:
         z = (3*(J-M)*(J+M))/(J*(2*J-1)*(2*J+1))
-        print('pi state')
+        if verbose == True:
+            print('pi state')
         pi = True
         return z, sigma_b, pi, sigma_r
     elif (Mp-M) == -1 and (Jp-J) == 1:
         z = (3*(J-M+1)*(J-M+2))/(2*(J+1)*(2*J+1)*(2*J+3))
-        print('sigma_r state')
+        if verbose == True:
+            print('sigma_r state')
         sigma_r = True
         return z, sigma_b, pi, sigma_r
     elif (Mp-M) == -1 and (Jp-J) == 0:
         z = (3*(J+M)*(J-M+1))/(2*J*(J+1)*(2*J+1))
-        print('sigma_r state')
+        if verbose == True:
+            print('sigma_r state')
         sigma_r = True
         return z, sigma_b, pi, sigma_r
     elif (Mp-M) == -1 and (Jp-J) == -1:
         z = (3*(J+M)*(J+M-1))/(2*J*(2*J-1)*(2*J+1))
-        print('sigma_r state')
+        if verbose == True:
+            print('sigma_r state')
         sigma_r = True
         return z, sigma_b, pi, sigma_r
     else:
