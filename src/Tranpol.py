@@ -56,7 +56,7 @@ def v_A(l_0,v_LOS,delta_l):
     delta_l: The dispersion of the wavelenght
     Calculates the damping wavelength
     '''
-    c=3e8 #m/s
+    c=3e5 #km/s
     return (l_0*v_LOS)/(c*delta_l)
 
 def v_B(l_0,delta_l,B,S_l,L_l,J_l,S_u,L_u,J_u,M_l,M_u):
@@ -466,7 +466,7 @@ if __name__ == '__main__' :
 
     v = v(np.arange(6301.5-1,6301.5+1,0.01),6301.5,0.1)
 
-    v_A = v_A(6301.5,10e3,0.1)
+    v_A = v_A(6301.5,10,0.1)
 
     v_B = v_B(6301.5,0.1,1000,2,2,2,3,2,3,2,3)
 
