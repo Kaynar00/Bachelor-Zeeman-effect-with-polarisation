@@ -311,7 +311,7 @@ def profilessumtest(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag):
     plt.savefig('profilessum.png')
     plt.show()
 
-def trcoefs(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0):
+def trcoefs(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
     '''
     v: reduced frequency
     v_A: the normalized shift due to bulking
@@ -330,15 +330,15 @@ def trcoefs(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0):
     '''
     eta_b, eta_p, eta_r, rho_b, rho_p, rho_r = profilessum(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag)
     hI = 1+eta_0*0.5*(eta_p*m.sin(theta)**2+((eta_b+eta_r)/2)*(1+m.cos(theta)**2))
-    hQ = eta_0*0.5*(eta_p-((eta_b+eta_r)/2))*m.sin(theta)**2*m.cos(2*X)
-    hU = eta_0*0.5*(eta_p-((eta_b+eta_r)/2))*m.sin(theta)**2*m.sin(2*X)
+    hQ = eta_0*0.5*(eta_p-((eta_b+eta_r)/2))*m.sin(theta)**2*m.cos(2*Xi)
+    hU = eta_0*0.5*(eta_p-((eta_b+eta_r)/2))*m.sin(theta)**2*m.sin(2*Xi)
     hV = eta_0*0.5*(eta_r-eta_b)*m.cos(theta)
-    rQ = eta_0*0.5*(rho_p-((rho_b+rho_r)/2))*m.sin(theta)**2*m.cos(2*X)
-    rU = eta_0*0.5*(rho_p-((rho_b+rho_r)/2))*m.sin(theta)**2*m.sin(2*X)
+    rQ = eta_0*0.5*(rho_p-((rho_b+rho_r)/2))*m.sin(theta)**2*m.cos(2*Xi)
+    rU = eta_0*0.5*(rho_p-((rho_b+rho_r)/2))*m.sin(theta)**2*m.sin(2*Xi)
     rV = eta_0*0.5*(rho_r-rho_b)*m.cos(theta)
     return hI, hQ, hU, hV, rQ, rU, rV
 
-def trcoefstest(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0):
+def trcoefstest(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
     '''
     v: reduced frequency
     v_A: the normalized shift due to bulking
@@ -355,7 +355,7 @@ def trcoefstest(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0):
     eta_0: a normalization constant
     Plots the transition coefficients depending on different reduced frequency
     '''
-    hI, hQ, hU, hV, rQ, rU, rV = trcoefs(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0)
+    hI, hQ, hU, hV, rQ, rU, rV = trcoefs(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0)
     newfig = plt.figure
     plt.plot(v,hI,label='hI')
     plt.plot(v,hQ,label='hQ')
@@ -369,7 +369,7 @@ def trcoefstest(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0):
     plt.savefig('transfer_coefficients.png')
     plt.show()
 
-def UR(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0):
+def UR(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
     '''
     a: the slope of the planckfunction
     b: value of planck function when optical depth is zero
@@ -388,7 +388,7 @@ def UR(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0):
     eta_0: a normalization constant
     Calculates the intensities for the different stokes parameters with the Unno-Rachkovsky solutions.
     '''
-    hI, hQ, hU, hV, rQ, rU, rV = trcoefs(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0)
+    hI, hQ, hU, hV, rQ, rU, rV = trcoefs(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0)
     Pi = hQ*rQ + hU*rU + hV*rV
     delta = (hI**2)*((hI**2)-(hQ**2)-(hU**2)-(hV**2)+(rQ**2)+(rU**2)+(rV**2))-Pi**2
     I = b+(delta**-1)*(hI*((hI**2)+(rQ**2)+(rU**2)+(rV**2)))*a
@@ -397,7 +397,7 @@ def UR(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0):
     V = -(delta**-1)*((hI**2)*hV+hI*(hU*rQ-hQ*rU)+rV*Pi)*a
     return I,Q,U,V
 
-def UR_test(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0):
+def UR_test(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
     '''
     a: the slope of the planckfunction
     b: value of planck function when optical depth is zero
@@ -416,7 +416,7 @@ def UR_test(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0):
     eta_0: a normalization constant
     Plots the intensities for the different stokes parameters with the Unno-Rachkovsky solutions.
     '''
-    I,Q,U,V = UR(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,X,eta_0)
+    I,Q,U,V = UR(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0)
     newfig = plt.figure()
     plt.plot(v,I,label='I')
     plt.legend()
