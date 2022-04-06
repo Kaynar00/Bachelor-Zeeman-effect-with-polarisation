@@ -143,6 +143,7 @@ def Zeemansplit(J_l,J_u,L_l,L_u,S_l,S_u):
     S_u: The spin quantum number for the upper state
     L_u: The angular momentum quantum number for the upper state
     J_u: The total angular momentum quantum number for the upper state
+    Calculates the strength of each Zeeman components
     '''
     g_l = g(S_l,L_l,J_l)
     g_u = g(S_u,L_u,J_u)
@@ -176,6 +177,7 @@ def Zeemansplittest(J_l,J_u,L_l,L_u,S_l,S_u):
     S_u: The spin quantum number for the upper state
     L_u: The angular momentum quantum number for the upper state
     J_u: The total angular momentum quantum number for the upper state
+    Plots the strength of each Zeeman color and color the bar depending on the type of transition where blue is sigma_b, green is pi and red is sigma_r
     '''
     split, comp, sigma_b, pi, sigma_r = Zeemansplit(J_l,J_u,L_l,L_u,S_l,S_u)
     newfig = plt.figure()
@@ -212,7 +214,7 @@ def profilestest(v,v_A,v_B,g_i,g_f,M_i,M_f,J_i,J_f,aimag):
     v_B: the normalized Zeeman splitting
     J_i: the rotational quantum nuber for the initial state
     J_f: the rotational quantum number for the final state
-    aimag: the damping constant times the imaginary number "j"
+    aimag: the damping constant
     plots the function profiles for different frequencies
     '''
     eta, rho, sigma_b, pi, sigma_r = profiles(v,v_A,v_B,g_i,g_f,M_i,M_f,J_i,J_f,aimag)
@@ -235,7 +237,7 @@ def profilessum(v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag):
     L_f: the angular momentum quantum number for final state
     S_i: the spin quantum number for initial state
     S_f: the spin quantum number for final state
-    aimag: the damping constatn times the imaginary number "j"
+    aimag: the damping constant
     Calculates the profiles eta_b, eta_p, eta_r, rho_b, rho_p and rho_r
     '''
     print(J_i)
@@ -276,7 +278,7 @@ def profilessumtest(v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag):
     L_f: the angular momentum quantum number for final state
     S_i: the spin quantum number for initial state
     S_f: the spin quantum number for final state
-    aimag: the damping constatn times the imaginary number "j"
+    aimag: the damping constant
     Plots the profiles eta_b, eta_p, eta_r, rho_b, rho_p and rho_r depending on different relative frequencies
     '''
     eta_b, eta_p, eta_r, rho_b, rho_p, rho_r = profilessum(v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag)
@@ -303,9 +305,10 @@ def trcoefs(v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag,theta,X,eta_0):
     L_f: the angular momentum quantum number for final state
     S_i: the spin quantum number for initial state
     S_f: the spin quantum number for final state
-    aimag: the damping constatn times the imaginary number "j"
+    aimag: the damping constant
     theta: an angle for polarisation
     X: an angle for polarisation
+    eta_0: a normalization constant
     Caclulates the transition coefficients
     '''
     eta_b, eta_p, eta_r, rho_b, rho_p, rho_r = profilessum(v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag)
@@ -332,6 +335,7 @@ def trcoefstest(v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag,theta,X,eta_0):
     aimag: the damping constatn times the imaginary number "j"
     theta: an angle for polarisation
     X: an angle for polarisation
+    eta_0: a normalization constant
     Plots the transition coefficients depending on different reduced frequency
     '''
     hI, hQ, hU, hV, rQ, rU, rV = trcoefs(v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag,theta,X,eta_0)
@@ -350,11 +354,8 @@ def trcoefstest(v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag,theta,X,eta_0):
 
 def UR(a,b,v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag,theta,X,eta_0):
     '''
-    T1: Temperature at tau1
-    tau1: Optical depth 1
-    T2: Temperature at tau2
-    tau2: Optical depth 2
-    nu_ref: A reference frequency at the continuum
+    a: the slope of the planckfunction
+    b: value of planck function when optical depth is zero
     v: reduced frequency
     v_A: the normalized shift due to bulking
     v_B: the normalized Zeeman shifting
@@ -364,9 +365,10 @@ def UR(a,b,v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag,theta,X,eta_0):
     L_f: the angular momentum quantum number for final state
     S_i: the spin quantum number for initial state
     S_f: the spin quantum number for final state
-    aimag: the damping constatn times the imaginary number "j"
+    aimag: the damping constant times the imaginary number "j"
     theta: an angle for polarisation
     X: an angle for polarisation
+    eta_0: a normalization constant
     Calculates the intensities for the different stokes parameters with the Unno-Rachkovsky solutions.
     '''
     hI, hQ, hU, hV, rQ, rU, rV = trcoefs(v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag,theta,X,eta_0)
@@ -379,6 +381,24 @@ def UR(a,b,v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag,theta,X,eta_0):
     return I,Q,U,V
 
 def UR_test(a,b,v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag,theta,X,eta_0):
+    '''
+    a: the slope of the planckfunction
+    b: value of planck function when optical depth is zero
+    v: reduced frequency
+    v_A: the normalized shift due to bulking
+    v_B: the normalized Zeeman shifting
+    J_i: the rotational quantum nuber for initial state
+    J_f: the rotational quantumb number for final state
+    L_i: the angular momentum quantum number for initial state
+    L_f: the angular momentum quantum number for final state
+    S_i: the spin quantum number for initial state
+    S_f: the spin quantum number for final state
+    aimag: the damping constant times the imaginary number "j"
+    theta: an angle for polarisation
+    X: an angle for polarisation
+    eta_0: a normalization constant
+    Plots the intensities for the different stokes parameters with the Unno-Rachkovsky solutions.
+    '''
     I,Q,U,V = UR(a,b,v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag,theta,X,eta_0)
     newfig = plt.figure()
     plt.plot(v,I,label='I')
