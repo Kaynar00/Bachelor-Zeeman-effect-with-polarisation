@@ -191,33 +191,41 @@ def Zeemansplittest(J_l,J_u,L_l,L_u,S_l,S_u):
     plt.savefig('Zeemansplit.png')
     plt.show()
 
-def profiles(v,v_A,v_B,g_i,g_f,M_i,M_f,J_i,J_f,aimag):
+def profiles(v,v_A,v_B,g_l,g_u,M_l,M_u,J_l,J_u,aimag):
     '''
     v: reduced frequency
     v_A: the normalized shift due to bulking
     v_B: the normalized zeeman splitting
-    J_i: the rotational quantum nuber for the initial state
-    J_f: the rotational quantum number for the final state
+    J_i: the rotational quantum nuber for the lower state
+    J_f: the rotational quantum number for the upper state
+    M_l: magnetic quantum number for lower state
+    M_u: magnetic quantum number for upper state
+    g_l: the Landé factor for the lower state
+    g_u: the Landé factor for the upper state
     aimag: the damping constant times the imaginary number "j" 
     calculates the profile value at different frequencies
     '''
-    z = special.wofz(v-v_A+v_B*(g_f*M_f-g_i*M_i)+1j*aimag)
-    f, sigma_b, pi, sigma_r = zcomp(M_i,M_f,J_i,J_f)
+    z = special.wofz(v-v_A+v_B*(g_u*M_u-g_l*M_l)+1j*aimag)
+    f, sigma_b, pi, sigma_r = zcomp(M_l,M_u,J_l,J_u)
     eta = f*z.real
     rho = f*z.imag
     return eta, rho, sigma_b, pi, sigma_r
 
-def profilestest(v,v_A,v_B,g_i,g_f,M_i,M_f,J_i,J_f,aimag):
+def profilestest(v,v_A,v_B,g_l,g_u,M_l,M_u,J_l,J_u,aimag):
     '''
     v: reduced frequency
     v_A: the normalized shift due to bulking
     v_B: the normalized Zeeman splitting
     J_i: the rotational quantum nuber for the initial state
     J_f: the rotational quantum number for the final state
+    M_l: magnetic quantum number for lower state
+    M_u: magnetic quantum number for upper state
+    g_l: the Landé factor for the lower state
+    g_u: the Landé factor for the upper state
     aimag: the damping constant
     plots the function profiles for different frequencies
     '''
-    eta, rho, sigma_b, pi, sigma_r = profiles(v,v_A,v_B,g_i,g_f,M_i,M_f,J_i,J_f,aimag)
+    eta, rho, sigma_b, pi, sigma_r = profiles(v,v_A,v_B,g_l,g_u,M_l,M_u,J_l,J_u,aimag)
     newfig = plt.figure()
     plt.plot(v,eta,label='eta')
     plt.plot(v,rho,label='rho')
@@ -226,7 +234,7 @@ def profilestest(v,v_A,v_B,g_i,g_f,M_i,M_f,J_i,J_f,aimag):
     plt.savefig('profiles.png')
     plt.show()
 
-def profilessum(v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag):
+def profilessum(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag):
     '''
     v: reduced frequency
     v_A: the normalized shift due to bulking
@@ -240,9 +248,9 @@ def profilessum(v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag):
     aimag: the damping constant
     Calculates the profiles eta_b, eta_p, eta_r, rho_b, rho_p and rho_r
     '''
-    print(J_i)
-    M_i = list(range(-J_i,J_i+1))
-    M_f = list(range(-J_f,J_f+1))
+    print(J_l)
+    M_l = list(range(-J_l,J_l+1))
+    M_u = list(range(-J_u,J_u+1))
     eta_b = 0
     eta_p = 0
     eta_r = 0
@@ -250,12 +258,12 @@ def profilessum(v,v_A,v_B,J_i,J_f,L_i,L_f,S_i,S_f,aimag):
     rho_p = 0
     rho_r = 0
 
-    for i in M_i:
-        for f in M_f:
-            if i == f + 1 or i == f or i == f-1:
-                g_i = g(S_i,L_i,J_i)
-                g_f = g(S_f,L_f,J_f)
-                eta, rho, sigma_b, pi, sigma_r = profiles(v,v_A,v_B,g_i,g_f,i,f,J_i,J_f,aimag)
+    for l in M_l:
+        for u in M_u:
+            if l == u + 1 or l == u or l == u-1:
+                g_l = g(S_l,L_l,J_l)
+                g_u = g(S_u,L_u,J_u)
+                eta, rho, sigma_b, pi, sigma_r = profiles(v,v_A,v_B,g_l,g_u,l,u,J_l,J_u,aimag)
                 if sigma_b == True:
                     eta_b += eta
                     rho_b += rho
