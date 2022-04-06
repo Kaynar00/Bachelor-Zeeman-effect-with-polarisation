@@ -40,29 +40,29 @@ def g_eff(S_l,L_l,J_l,S_u,L_u,J_u):
     '''
     return 0.5*(g(S_l,L_l,J_l)+g(S_u,L_u,J_u))+0.25*(g(S_l,L_l,J_l)-g(S_u,L_u,J_u))*((J_l*(J_l+1))-(J_u*(J_u+1)))
 
-def v(l,l_0,delta_l):
+def v(l,l_0,ddopller):
     '''
     l: wavelenght
     l_0: wavelength for the line
-    delta_l: The dispersion of the wavelenght
+    ddopller: The doppler width of the line
     Calculates the reduced wavelength
     '''
-    return (l-l_0)/(delta_l)
+    return (l-l_0)/(ddopller)
 
-def v_A(l_0,v_LOS,delta_l):
+def v_A(l_0,v_LOS,ddopller):
     '''
     l_0: wavelength for the line
     v_LOS: Line Of Sight velocity
-    delta_l: The dispersion of the wavelenght
+    ddopller: The doppler width of the line
     Calculates the damping wavelength
     '''
     c=3e5 #km/s
-    return (l_0*v_LOS)/(c*delta_l)
+    return (l_0*v_LOS)/(c*ddopller)
 
-def v_B(l_0,delta_l,B,S_l,L_l,J_l,S_u,L_u,J_u,M_l,M_u):
+def v_B(l_0,ddopller,B,S_l,L_l,J_l,S_u,L_u,J_u,M_l,M_u):
     '''
     l_0: wavelength for the line
-    delta_l: The dispersion of the wavelenght
+    ddopller: The doppler width of the line
     B: The magnetic field
     S_l: The spin quantum number for the lower state
     L_l: The angular momentum quantum number for the lower state
@@ -74,7 +74,7 @@ def v_B(l_0,delta_l,B,S_l,L_l,J_l,S_u,L_u,J_u,M_l,M_u):
     '''
     g_l = g(S_l,L_l,J_l)
     g_u = g(S_u,L_u,J_u)
-    return 4.67e-13*(l_0**2)*B*((g_l*M_l-g_u*M_u)/delta_l)
+    return 4.67e-13*(l_0**2)*B*((g_l*M_l-g_u*M_u)/ddopller)
 
 def zcomp(M,Mp,J,Jp,verbose=False):
     '''
