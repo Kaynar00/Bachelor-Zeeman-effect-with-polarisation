@@ -325,7 +325,7 @@ def trcoefs(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
     aimag: the damping constant
     theta: an angle for the inclination of the magnetic field
     X: an angle for the inclination of the magnetic field
-    eta_0: a normalization constant
+    eta_0: the ratio between the absorption of the line and the absorption of the continuum
     Caclulates the transition coefficients
     '''
     eta_b, eta_p, eta_r, rho_b, rho_p, rho_r = profilessum(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag)
@@ -352,7 +352,7 @@ def trcoefstest(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
     aimag: the damping constatn times the imaginary number "j"
     theta: an angle for the inclination of the magnetic field
     X: an angle for the inclination of the magnetic field
-    eta_0: a normalization constant
+    eta_0: the ratio between the absorption of the line and the absorption of the continuum
     Plots the transition coefficients depending on different reduced frequency
     '''
     hI, hQ, hU, hV, rQ, rU, rV = trcoefs(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0)
@@ -385,7 +385,7 @@ def UR(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
     aimag: the damping constant times the imaginary number "j"
     theta: an angle for the inclination of the magnetic field
     X: an angle for the inclination of the magnetic field
-    eta_0: a normalization constant
+    eta_0: the ratio between the absorption of the line and the absorption of the continuum
     Calculates the intensities for the different stokes parameters with the Unno-Rachkovsky solutions.
     '''
     hI, hQ, hU, hV, rQ, rU, rV = trcoefs(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0)
@@ -413,7 +413,7 @@ def UR_test(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
     aimag: the damping constant times the imaginary number "j"
     theta: an angle for the inclination of the magnetic field
     X: an angle for the inclination of the magnetic field
-    eta_0: a normalization constant
+    eta_0: the ratio between the absorption of the line and the absorption of the continuum
     Plots the intensities for the different stokes parameters with the Unno-Rachkovsky solutions.
     '''
     I,Q,U,V = UR(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0)
