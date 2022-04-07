@@ -426,7 +426,7 @@ if __name__ == '__main__' :
     v_LOS = 10
     B = 1000
 
-    UR_test(a,b,B,l,l_0,ddopller,0.01,m.radians(30),m.radians(45),10,2,3,2,2,2,3)
+    UR_test(a,b,B,l,l_0,ddopller,0.01,m.radians(30),m.radians(45),10,2,2,1,2,2,2)
 
     Zeemansplittest(2,3,2,2,2,3)
 
