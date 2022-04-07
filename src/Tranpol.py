@@ -416,7 +416,7 @@ def UR_test(a,b,v,v_A,v_B,S_l,L_l,J_l,S_u,L_u,J_u,aimag,theta,Xi,eta_0):
     eta_0: the ratio between the absorption of the line and the absorption of the continuum
     Plots the intensities for the different stokes parameters with the Unno-Rachkovsky solutions.
     '''
-    I,Q,U,V = UR(a,b,v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0)
+    I,Q,U,V = UR(a,b,v,v_A,v_B,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u)
     Stokes = [I,Q,U,V]
     Stokeslabel = ['I','Q','U','V']
     newfig = plt.figure()
@@ -458,7 +458,7 @@ if __name__ == '__main__' :
 
     v_B = v_B(6301.5,0.1,1000)
 
-    UR_test(a,b,v,v_A,v_B,2,3,2,2,2,3,0.01,m.radians(30),m.radians(45),10)
+    UR_test(a,b,v,v_A,v_B,0.01,m.radians(30),m.radians(45),10,2,3,2,2,2,3)
 
     Zeemansplittest(2,3,2,2,2,3)
 
