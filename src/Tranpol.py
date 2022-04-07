@@ -40,40 +40,6 @@ def g_eff(S_l,L_l,J_l,S_u,L_u,J_u):
     '''
     return 0.5*(g(S_l,L_l,J_l)+g(S_u,L_u,J_u))+0.25*(g(S_l,L_l,J_l)-g(S_u,L_u,J_u))*((J_l*(J_l+1))-(J_u*(J_u+1)))
 
-def v(l,l_0,ddopller):
-    '''
-    l: wavelenght
-    l_0: wavelength for the line
-    ddopller: The doppler width of the line
-    Calculates the reduced wavelength
-    '''
-    return (l-l_0)/(ddopller)
-
-def v_A(l_0,v_LOS,ddopller):
-    '''
-    l_0: wavelength for the line
-    v_LOS: Line Of Sight velocity
-    ddopller: The doppler width of the line
-    Calculates the damping wavelength
-    '''
-    c=3e5 #km/s
-    return (l_0*v_LOS)/(c*ddopller)
-
-def v_B(l_0,ddopller,B):
-    '''
-    l_0: wavelength for the line
-    ddopller: The doppler width of the line
-    B: The magnetic field
-    S_l: The spin quantum number for the lower state
-    L_l: The angular momentum quantum number for the lower state
-    J_l: The total angular momentum quantum number for the lower state
-    S_u: The spin quantum number for the upper state
-    L_u: The angular momentum quantum number for the upper state
-    J_u: The total angular momentum quantum number for the upper state
-    Calculates the magnetic wavelength
-    '''
-    return (4.67e-13*(l_0**2)*B)/ddopller
-
 def zcomp(M,Mp,J,Jp,verbose=False):
     '''
     M: Initial magnetic quantum number
@@ -257,7 +223,6 @@ def profilessum(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag):
     aimag: the damping constant
     Calculates the profiles eta_b, eta_p, eta_r, rho_b, rho_p and rho_r
     '''
-    print(J_l)
     M_l = list(range(-J_l,J_l+1))
     M_u = list(range(-J_u,J_u+1))
     eta_b = 0
@@ -369,7 +334,7 @@ def trcoefstest(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
     plt.savefig('transfer_coefficients.pdf')
     plt.show()
 
-def UR(a,b,v,v_A,v_B,S_l,L_l,J_l,S_u,L_u,J_u,aimag,theta,Xi,eta_0):
+def UR(a,b,B,l,l_0,ddopller,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u):
     '''
     a: the slope of the planckfunction
     b: value of planck function when optical depth is zero
@@ -388,6 +353,10 @@ def UR(a,b,v,v_A,v_B,S_l,L_l,J_l,S_u,L_u,J_u,aimag,theta,Xi,eta_0):
     eta_0: the ratio between the absorption of the line and the absorption of the continuum
     Calculates the intensities for the different stokes parameters with the Unno-Rachkovsky solutions.
     '''
+    c = 3e5
+    v = (l-l_0)/(ddopller)
+    v_A = (l_0*v_LOS)/(c*ddopller)
+    v_B =  (4.67e-13*(l_0**2)*B)/ddopller
     hI, hQ, hU, hV, rQ, rU, rV = trcoefs(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0)
     Pi = hQ*rQ + hU*rU + hV*rV
     delta = (hI**2)*((hI**2)-(hQ**2)-(hU**2)-(hV**2)+(rQ**2)+(rU**2)+(rV**2))-Pi**2
@@ -397,7 +366,7 @@ def UR(a,b,v,v_A,v_B,S_l,L_l,J_l,S_u,L_u,J_u,aimag,theta,Xi,eta_0):
     V = -(delta**-1)*((hI**2)*hV+hI*(hU*rQ-hQ*rU)+rV*Pi)*a
     return I,Q,U,V
 
-def UR_test(a,b,v,v_A,v_B,S_l,L_l,J_l,S_u,L_u,J_u,aimag,theta,Xi,eta_0):
+def UR_test(a,b,B,l,l_0,ddopller,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u):
     '''
     a: the slope of the planckfunction
     b: value of planck function when optical depth is zero
@@ -416,13 +385,13 @@ def UR_test(a,b,v,v_A,v_B,S_l,L_l,J_l,S_u,L_u,J_u,aimag,theta,Xi,eta_0):
     eta_0: the ratio between the absorption of the line and the absorption of the continuum
     Plots the intensities for the different stokes parameters with the Unno-Rachkovsky solutions.
     '''
-    I,Q,U,V = UR(a,b,v,v_A,v_B,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u)
+    I,Q,U,V = UR(a,b,B,l,l_0,ddopller,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u)
     Stokes = [I,Q,U,V]
     Stokeslabel = ['I','Q','U','V']
     newfig = plt.figure()
     for i in range(4):
         plt.subplot(2,2,i+1)
-        plt.plot(v,Stokes[i],label=Stokeslabel[i])
+        plt.plot(l,Stokes[i],label=Stokeslabel[i])
     plt.savefig('UR_sol.pdf')
     plt.show()
     
@@ -451,14 +420,13 @@ if __name__ == '__main__' :
     #profilessumtest(np.arange(nu_start,nu_stop,nu_step),lv_convert(300e-9),lv_convert(5247.1e-10),2,3,2,2,2,3,30j)
 
     #trcoefstest(np.arange(nu_start,nu_stop,nu_step),lv_convert(300e-9),lv_convert(5247.1e-10),2,3,2,2,2,3,30j,m.pi/4,m.pi/4,1)
+    l = np.arange(6301.5-1,6301.5+1,0.01)
+    l_0 = 6301.5
+    ddopller = 0.1
+    v_LOS = 10
+    B = 1000
 
-    v = v(np.arange(6301.5-1,6301.5+1,0.01),6301.5,0.1)
-
-    v_A = v_A(6301.5,10,0.1)
-
-    v_B = v_B(6301.5,0.1,1000)
-
-    UR_test(a,b,v,v_A,v_B,0.01,m.radians(30),m.radians(45),10,2,3,2,2,2,3)
+    UR_test(a,b,B,l,l_0,ddopller,0.01,m.radians(30),m.radians(45),10,2,3,2,2,2,3)
 
     Zeemansplittest(2,3,2,2,2,3)
 
