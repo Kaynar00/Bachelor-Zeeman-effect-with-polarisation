@@ -7,7 +7,7 @@ import math as m
 
 def lv_convert(l):
     '''
-    l: wavelength
+    l: wavelength [m]
     takes a wavelength of ligth l and converts it to frequency
     '''
     c = 3e8
@@ -46,6 +46,7 @@ def zcomp(M,Mp,J,Jp,verbose=False):
     Mp: Final magnetic quantum number
     J: Initial rotational quantum number
     Jp: Final rotational quantum nuber
+    verbose: If True, prints the transition made for every calculation
     Calculates the Zeeman components for different M, Mp ,J and Jp.
     '''
     sigma_b = False
@@ -110,12 +111,12 @@ def zcomp(M,Mp,J,Jp,verbose=False):
 
 def Zeemansplit(J_l,J_u,L_l,L_u,S_l,S_u):
     '''
-    S_l: The spin quantum number for the lower state
-    L_l: The angular momentum quantum number for the lower state
     J_l: The total angular momentum quantum number for the lower state
-    S_u: The spin quantum number for the upper state
-    L_u: The angular momentum quantum number for the upper state
     J_u: The total angular momentum quantum number for the upper state
+    L_l: The angular momentum quantum number for the lower state
+    L_u: The angular momentum quantum number for the upper state
+    S_l: The spin quantum number for the lower state
+    S_u: The spin quantum number for the upper state
     Calculates the strength of each Zeeman components
     '''
     g_l = g(S_l,L_l,J_l)
@@ -144,12 +145,12 @@ def Zeemansplit(J_l,J_u,L_l,L_u,S_l,S_u):
 
 def Zeemansplittest(J_l,J_u,L_l,L_u,S_l,S_u):
     '''
-    S_l: The spin quantum number for the lower state
-    L_l: The angular momentum quantum number for the lower state
     J_l: The total angular momentum quantum number for the lower state
-    S_u: The spin quantum number for the upper state
-    L_u: The angular momentum quantum number for the upper state
     J_u: The total angular momentum quantum number for the upper state
+    L_l: The angular momentum quantum number for the lower state
+    L_u: The angular momentum quantum number for the upper state
+    S_l: The spin quantum number for the lower state
+    S_u: The spin quantum number for the upper state
     Plots the strength of each Zeeman color and color the bar depending on the type of transition where blue is sigma_b, green is pi and red is sigma_r
     '''
     split, comp, sigma_b, pi, sigma_r = Zeemansplit(J_l,J_u,L_l,L_u,S_l,S_u)
@@ -171,13 +172,13 @@ def profiles(v,v_A,v_B,g_l,g_u,M_l,M_u,J_l,J_u,aimag):
     v: reduced frequency
     v_A: the normalized shift due to bulking
     v_B: the normalized zeeman splitting
-    J_i: the rotational quantum nuber for the lower state
-    J_f: the rotational quantum number for the upper state
-    M_l: magnetic quantum number for lower state
-    M_u: magnetic quantum number for upper state
     g_l: the Landé factor for the lower state
     g_u: the Landé factor for the upper state
-    aimag: the damping constant times the imaginary number "j" 
+    M_l: magnetic quantum number for lower state
+    M_u: magnetic quantum number for upper state
+    J_l: the rotational quantum nuber for the lower state
+    J_u: the rotational quantum number for the upper state
+    aimag: the damping constant
     calculates the profile value at different frequencies
     '''
     z = special.wofz(v-v_A+v_B*(g_u*M_u-g_l*M_l)+1j*aimag)
@@ -190,14 +191,14 @@ def profilestest(v,v_A,v_B,g_l,g_u,M_l,M_u,J_l,J_u,aimag):
     '''
     v: reduced frequency
     v_A: the normalized shift due to bulking
-    v_B: the normalized Zeeman splitting
-    J_i: the rotational quantum nuber for the initial state
-    J_f: the rotational quantum number for the final state
-    M_l: magnetic quantum number for lower state
-    M_u: magnetic quantum number for upper state
+    v_B: the normalized zeeman splitting
     g_l: the Landé factor for the lower state
     g_u: the Landé factor for the upper state
-    aimag: the damping constant
+    M_l: magnetic quantum number for lower state
+    M_u: magnetic quantum number for upper state
+    J_l: the rotational quantum nuber for the lower state
+    J_u: the rotational quantum number for the upper state
+    aimag: the damping constant 
     plots the function profiles for different frequencies
     '''
     eta, rho, sigma_b, pi, sigma_r = profiles(v,v_A,v_B,g_l,g_u,M_l,M_u,J_l,J_u,aimag)
@@ -289,7 +290,7 @@ def trcoefs(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
     S_u: the spin quantum number for upper state
     aimag: the damping constant
     theta: an angle for the inclination of the magnetic field
-    X: an angle for the inclination of the magnetic field
+    Xi: an angle for the inclination of the magnetic field
     eta_0: the ratio between the absorption of the line and the absorption of the continuum
     Caclulates the transition coefficients
     '''
@@ -316,7 +317,7 @@ def trcoefstest(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
     S_u: the spin quantum number for upper state
     aimag: the damping constatn times the imaginary number "j"
     theta: an angle for the inclination of the magnetic field
-    X: an angle for the inclination of the magnetic field
+    Xi: an angle for the inclination of the magnetic field
     eta_0: the ratio between the absorption of the line and the absorption of the continuum
     Plots the transition coefficients depending on different reduced frequency
     '''
@@ -334,23 +335,25 @@ def trcoefstest(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
     plt.savefig('transfer_coefficients.pdf')
     plt.show()
 
-def UR(a,b,B,l,l_0,ddopller,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u):
+def UR(a,b,B,l,l_0,ddopller,v_LOS,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u):
     '''
     a: the slope of the planckfunction
     b: value of planck function when optical depth is zero
-    v: reduced frequency
-    v_A: the normalized shift due to bulking
-    v_B: the normalized Zeeman shifting
+    B: The magnetic field [T]
+    l: wavelength
+    l_0: wavelength of the line
+    ddopller: Dopllerwidth of the line
+    v_LOS: line of sight velocity [km/s]
+    aimag: the damping constant times the imaginary number "j"
+    theta: an angle for the inclination of the magnetic field
+    X: an angle for the inclination of the magnetic field
+    eta_0: the ratio between the absorption of the line and the absorption of the continuum
     J_l: the rotational quantum nuber for lower state
     J_u: the rotational quantumb number for upper state
     L_l: the angular momentum quantum number for lower state
     L_u: the angular momentum quantum number for upper state
     S_l: the spin quantum number for lower state
     S_u: the spin quantum number for upper state
-    aimag: the damping constant times the imaginary number "j"
-    theta: an angle for the inclination of the magnetic field
-    X: an angle for the inclination of the magnetic field
-    eta_0: the ratio between the absorption of the line and the absorption of the continuum
     Calculates the intensities for the different stokes parameters with the Unno-Rachkovsky solutions.
     '''
     c = 3e5
@@ -366,26 +369,28 @@ def UR(a,b,B,l,l_0,ddopller,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u):
     V = -(delta**-1)*((hI**2)*hV+hI*(hU*rQ-hQ*rU)+rV*Pi)*a
     return I,Q,U,V
 
-def UR_test(a,b,B,l,l_0,ddopller,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u):
+def UR_test(a,b,B,l,l_0,ddopller,v_LOS,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u):
     '''
     a: the slope of the planckfunction
     b: value of planck function when optical depth is zero
-    v: reduced frequency
-    v_A: the normalized shift due to bulking
-    v_B: the normalized Zeeman shifting
+    B: The magnetic field [T]
+    l: wavelength
+    l_0: wavelength of the line
+    ddopller: Dopllerwidth of the line
+    v_LOS: line of sight velocity [km/s]
+    aimag: the damping constant times the imaginary number "j"
+    theta: an angle for the inclination of the magnetic field
+    X: an angle for the inclination of the magnetic field
+    eta_0: the ratio between the absorption of the line and the absorption of the continuum
     J_l: the rotational quantum nuber for lower state
     J_u: the rotational quantumb number for upper state
     L_l: the angular momentum quantum number for lower state
     L_u: the angular momentum quantum number for upper state
     S_l: the spin quantum number for lower state
     S_u: the spin quantum number for upper state
-    aimag: the damping constant times the imaginary number "j"
-    theta: an angle for the inclination of the magnetic field
-    X: an angle for the inclination of the magnetic field
-    eta_0: the ratio between the absorption of the line and the absorption of the continuum
     Plots the intensities for the different stokes parameters with the Unno-Rachkovsky solutions.
     '''
-    I,Q,U,V = UR(a,b,B,l,l_0,ddopller,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u)
+    I,Q,U,V = UR(a,b,B,l,l_0,ddopller,v_LOS,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u)
     Stokes = [I,Q,U,V]
     Stokeslabel = ['I','Q','U','V']
     newfig = plt.figure()
@@ -426,7 +431,7 @@ if __name__ == '__main__' :
     v_LOS = 10
     B = 1000
 
-    UR_test(a,b,B,l,l_0,ddopller,0.01,m.radians(30),m.radians(45),10,2,2,1,2,2,2)
+    UR_test(a,b,B,l,l_0,ddopller,v_LOS,0.01,m.radians(30),m.radians(45),10,2,2,1,2,2,2)
 
     Zeemansplittest(2,3,2,2,2,3)
 
