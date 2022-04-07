@@ -59,7 +59,7 @@ def v_A(l_0,v_LOS,ddopller):
     c=3e5 #km/s
     return (l_0*v_LOS)/(c*ddopller)
 
-def v_B(l_0,ddopller,B,S_l,L_l,J_l,S_u,L_u,J_u,M_l,M_u):
+def v_B(l_0,ddopller,B):
     '''
     l_0: wavelength for the line
     ddopller: The doppler width of the line
@@ -72,9 +72,7 @@ def v_B(l_0,ddopller,B,S_l,L_l,J_l,S_u,L_u,J_u,M_l,M_u):
     J_u: The total angular momentum quantum number for the upper state
     Calculates the magnetic wavelength
     '''
-    g_l = g(S_l,L_l,J_l)
-    g_u = g(S_u,L_u,J_u)
-    return 4.67e-13*(l_0**2)*B*((g_l*M_l-g_u*M_u)/ddopller)
+    return (4.67e-13*(l_0**2)*B)/ddopller
 
 def zcomp(M,Mp,J,Jp,verbose=False):
     '''
@@ -458,7 +456,7 @@ if __name__ == '__main__' :
 
     v_A = v_A(6301.5,10,0.1)
 
-    v_B = v_B(6301.5,0.1,1000,2,2,2,3,2,3,2,3)
+    v_B = v_B(6301.5,0.1,1000)
 
     UR_test(a,b,v,v_A,v_B,2,3,2,2,2,3,0.01,m.radians(30),m.radians(45),10)
 
