@@ -13,7 +13,7 @@ B = 1000
 a = 0.8
 b = 0.2
 
-I,Q,U,V = UR(a,b,B,x,l_0,ddopller,10,0.01,m.radians(30),m.radians(45),10,2,2,1,2,2,2)
+I,Q,U,V = UR(a,b,B,x,l_0,ddopller,10,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2)
 
 URlst = [I,Q,U,V]
 
