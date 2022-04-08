@@ -335,7 +335,7 @@ def trcoefstest(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag,theta,Xi,eta_0):
     plt.savefig('transfer_coefficients.pdf')
     plt.show()
 
-def UR(a,b,B,l,l_0,ddopller,v_LOS,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u):
+def UR(a,b,B,l,l_0,ddopller,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u):
     '''
     a: the slope of the planckfunction
     b: value of planck function when optical depth is zero
@@ -390,7 +390,7 @@ def UR_test(a,b,B,l,l_0,ddopller,v_LOS,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,
     S_u: the spin quantum number for upper state
     Plots the intensities for the different stokes parameters with the Unno-Rachkovsky solutions.
     '''
-    I,Q,U,V = UR(a,b,B,l,l_0,ddopller,v_LOS,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u)
+    I,Q,U,V = UR(a,b,B,l,l_0,ddopller,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u)
     Stokes = [I,Q,U,V]
     Stokeslabel = ['I','Q','U','V']
     newfig = plt.figure()
