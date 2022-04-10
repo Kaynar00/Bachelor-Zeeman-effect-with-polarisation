@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math as m
 
+space = 0.3
+
 #Exercise 1
 
 Zeemansplittest(2,2,1,2,2,2)
@@ -23,12 +25,16 @@ I2,Q2,U2,V2 = UR(a,b,B,x,l_0,ddopller,10,0.05,m.radians(45),m.radians(30),10,2,2
 
 URlst = [I2,Q2,U2,V2]
 
+
 for i in range(4):
     plt.subplot(2,2,i+1)
     plt.plot(x,Stokes[i],label=Stokeslabel[i])
     plt.plot(x,URlst[i],label='Keyurs '+Stokeslabel[i])
+    plt.xlabel('Wavelength')
+    plt.ylabel('Intensity')
     plt.legend()
-plt.title('Exercise 2')
+plt.suptitle('Exercise 2')
+plt.subplots_adjust(wspace = space + 0.1, hspace = space)
 plt.savefig('ExerciseW3_2.pdf')
 plt.show()
 
@@ -42,8 +48,11 @@ for i in range(4):
     plt.subplot(2,2,i+1)
     plt.plot(x,URlst[i],label='Exercise 2 '+Stokeslabel[i])
     plt.plot(x,UR3lst[i],label='Exercise 3 '+Stokeslabel[i])
+    plt.xlabel('Wavelength')
+    plt.ylabel('Intensity')
     plt.legend()
-plt.title('Exercise 3')
+plt.subplots_adjust(wspace = space + 0.1, hspace = space)
+plt.suptitle('Exercise 3')
 plt.savefig('ExerciseW3_3.pdf')
 plt.show()
 
@@ -66,12 +75,17 @@ for i in range(4):
     plt.plot(x,UR40lst[i],label='Exercise 4, Xi=0 '+Stokeslabel[i])
     plt.plot(x,UR445lst[i],label='Exercise 4, Xi=45 '+Stokeslabel[i])
     plt.plot(x,UR490lst[i],label='Exercise 4, Xi=90 '+Stokeslabel[i])
+    plt.xlabel('Wavelength')
+    plt.ylabel('Intensity')
     plt.legend()
-plt.title('Exercise 4')
+plt.subplots_adjust(wspace = space + 0.1, hspace = space)
+plt.suptitle('Exercise 4')
 plt.savefig('ExerciseW3_4.pdf')
 plt.show()
 
 #In I and V they don't depend on Xi but in Q and U they do
+
+#Exercise 5
 
 I50,Q50,U50,V50 = UR(a,b,B,x,l_0,ddopller,0,0.05,m.radians(0),m.radians(30),10,2,2,1,2,2,2)
 I545,Q545,U545,V545 = UR(a,b,B,x,l_0,ddopller,0,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2)
@@ -86,7 +100,13 @@ for i in range(4):
     plt.plot(x,UR40lst[i],label='Exercise 5, Theta=0 '+Stokeslabel[i])
     plt.plot(x,UR445lst[i],label='Exercise 5, Theta=45 '+Stokeslabel[i])
     plt.plot(x,UR490lst[i],label='Exercise 5, Theta=90 '+Stokeslabel[i])
+    plt.xlabel('Wavelength')
+    plt.ylabel('Intensity')
     plt.legend()
-plt.title('Exercise 4')
+plt.subplots_adjust(wspace = space + 0.1, hspace = space)
+plt.suptitle('Exercise 4')
 plt.savefig('ExerciseW3_5.pdf')
 plt.show()
+
+#Same as in exercise 4
+
