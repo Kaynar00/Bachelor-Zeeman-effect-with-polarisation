@@ -41,13 +41,16 @@ plt.show()
 #Exercise 3
 
 I3,Q3,U3,V3 = UR(a,b,10,x,l_0,ddopller,0,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2)
+I3000,Q3000,U3000,V3000 = UR(a,b,3000,x,l_0,ddopller,0,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2)
 
 UR3lst = [I3,Q3,U3,V3]
+UR3000lst = [I3000,Q3000,U3000,V3000]
 
 for i in range(4):
     plt.subplot(2,2,i+1)
     plt.plot(x,URlst[i],label='Exercise 2 '+Stokeslabel[i])
-    plt.plot(x,UR3lst[i],label='Exercise 3 '+Stokeslabel[i])
+    plt.plot(x,UR3lst[i],label='Exercise 3 '+Stokeslabel[i]+', B=10G')
+    plt.plot(x,UR3000lst[i],label='Exercise 3 '+Stokeslabel[i]+', B=3000G')
     plt.xlabel('Wavelength')
     plt.ylabel('Intensity')
     plt.legend(prop = {'size':4})
