@@ -40,8 +40,8 @@ plt.show()
 
 #Exercise 3
 
-I3,Q3,U3,V3 = UR(a,b,10,x,l_0,ddopller,0,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2)
-I3000,Q3000,U3000,V3000 = UR(a,b,3000,x,l_0,ddopller,0,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2)
+I3,Q3,U3,V3 = UR(a,b,10,x,l_0,ddopller,10,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2)
+I3000,Q3000,U3000,V3000 = UR(a,b,10000,x,l_0,ddopller,10,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2)
 
 UR3lst = [I3,Q3,U3,V3]
 UR3000lst = [I3000,Q3000,U3000,V3000]
@@ -93,6 +93,7 @@ plt.show()
 I50,Q50,U50,V50 = UR(a,b,B,x,l_0,ddopller,0,0.05,m.radians(0),m.radians(30),10,2,2,1,2,2,2)
 I545,Q545,U545,V545 = UR(a,b,B,x,l_0,ddopller,0,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2)
 I590,Q590,U590,V590 = UR(a,b,B,x,l_0,ddopller,0,0.05,m.radians(90),m.radians(30),10,2,2,1,2,2,2)
+UR5180lst = UR(a,b,B,x,l_0,ddopller,0,0.05,m.radians(180),m.radians(30),10,2,2,1,2,2,2)
 
 UR50lst = [I50,Q50,U50,V50]
 UR545lst = [I545,Q545,U545,V545]
@@ -100,9 +101,10 @@ UR590lst = [I590,Q590,U590,V590]
 
 for i in range(4):
     plt.subplot(2,2,i+1)
-    plt.plot(x,UR40lst[i],label='Exercise 5, Theta=0 '+Stokeslabel[i])
-    plt.plot(x,UR445lst[i],label='Exercise 5, Theta=45 '+Stokeslabel[i])
-    plt.plot(x,UR490lst[i],label='Exercise 5, Theta=90 '+Stokeslabel[i])
+    plt.plot(x,UR50lst[i],label='Exercise 5, Theta=0 '+Stokeslabel[i])
+    plt.plot(x,UR545lst[i],label='Exercise 5, Theta=45 '+Stokeslabel[i])
+    plt.plot(x,UR590lst[i],label='Exercise 5, Theta=90 '+Stokeslabel[i])
+    plt.plot(x,UR5180lst[i],label='Exercise 5, Theta=180 '+Stokeslabel[i])
     plt.xlabel('Wavelength')
     plt.ylabel('Intensity')
     plt.legend(prop = {'size':4})
