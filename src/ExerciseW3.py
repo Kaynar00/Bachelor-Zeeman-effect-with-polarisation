@@ -176,3 +176,85 @@ plt.subplots_adjust(wspace = space + 0.1, hspace = space)
 plt.suptitle('Changing damping')
 plt.savefig('damping.pdf')
 plt.show()
+
+#Changing Zeeman components
+
+#5D2-7D3
+
+#Plotting Zeeman components
+
+Zeemansplittest(2,3,2,2,2,3)
+
+#Changing v_LOS
+Iv1,Qv1,Uv1,Vv1 = UR(a,b,B,x,l_0,ddopller,1,0.05,m.radians(45),m.radians(30),10,2,3,2,2,2,3)
+Iv20,Qv20,Uv20,Vv20 = UR(a,b,B,x,l_0,ddopller,20,0.05,m.radians(45),m.radians(30),10,2,3,2,2,2,3)
+
+URv1lst = [Iv1,Qv1,Uv1,Vv1]
+URv20lst = [Iv20,Qv20,Uv20,Vv20]
+
+#Changing ddopller
+Idopller01,Qdopller01,Udopller01,Vdopller01 = UR(a,b,B,x,l_0,0.1,10,0.05,m.radians(45),m.radians(30),10,2,3,2,2,2,3)
+Idopller05,Qdopller05,Udopller05,Vdopller05 = UR(a,b,B,x,l_0,0.5,10,0.05,m.radians(45),m.radians(30),10,2,3,2,2,2,3)
+Idopller1,Qdopller1,Udopller1,Vdopller1 = UR(a,b,B,x,l_0,1,10,0.05,m.radians(45),m.radians(30),10,2,3,2,2,2,3)
+
+URdopller01lst = [Idopller01,Qdopller01,Udopller01,Vdopller01]
+URdopller05lst = [Idopller05,Qdopller05,Udopller05,Vdopller05]
+URdopller1lst = [Idopller1,Qdopller1,Udopller1,Vdopller1]
+
+#Changing damping constant
+Ia02,Qa02,Ua02,Va02 = UR(a,b,B,x,l_0,ddopller,10,0.2,m.radians(45),m.radians(30),10,2,3,2,2,2,3)
+Ia05,Qa05,Ua05,Va05 = UR(a,b,B,x,l_0,ddopller,10,0.5,m.radians(45),m.radians(30),10,2,3,2,2,2,3)
+Ia1,Qa1,Ua1,Va1 = UR(a,b,B,x,l_0,ddopller,10,1,m.radians(45),m.radians(30),10,2,3,2,2,2,3)
+
+URa02lst = [Ia02,Qa02,Ua02,Va02]
+URa05lst = [Ia05,Qa05,Ua05,Va05]
+URa1lst = [Ia1,Qa1,Ua1,Va1]
+
+#Plotting
+for i in range(4):
+    plt.subplot(2,2,i+1)
+    plt.plot(x,URlst[i],label=Stokeslabel[i])
+    plt.plot(x,URv1lst[i],label = 'v_LOS=0.1, '+Stokeslabel[i])
+    plt.plot(x,URv20lst[i],label = 'v_LOS=20, '+Stokeslabel[i])
+    plt.legend(prop = {'size':4})
+plt.subplots_adjust(wspace = space + 0.1, hspace = space)
+plt.suptitle('Changing v_LOS')
+plt.savefig('v_LOS2.pdf')
+plt.show()
+
+
+for i in range(4):
+    plt.subplot(2,2,i+1)
+    plt.plot(x,URlst[i],label=Stokeslabel[i])
+    plt.plot(x,URdopller01lst[i],label = 'ddopller=0.1, '+Stokeslabel[i])
+    plt.plot(x,URdopller05lst[i],label = 'ddopller=0.5, '+Stokeslabel[i])
+    plt.plot(x,URdopller1lst[i],label = 'ddopller=1, '+Stokeslabel[i])
+    plt.legend(prop = {'size':4})
+plt.subplots_adjust(wspace = space + 0.1, hspace = space)
+plt.suptitle('Changing ddopller')
+plt.savefig('ddopller2.pdf')
+plt.show()
+
+for i in range(4):
+    plt.subplot(2,2,i+1)
+    plt.plot(x,URlst[i],label=Stokeslabel[i])
+    plt.plot(x,URa02lst[i],label = 'damping = 0.2, '+Stokeslabel[i])
+    plt.plot(x,URa05lst[i],label = 'damping = 0.5, '+Stokeslabel[i])
+    plt.plot(x,URa1lst[i],label = 'damping = 1, '+Stokeslabel[i])
+    plt.legend(prop = {'size':4})
+plt.subplots_adjust(wspace = space + 0.1, hspace = space)
+plt.suptitle('Changing damping')
+plt.savefig('damping2.pdf')
+plt.show()
+
+I,Q,U,V = UR(a,b,B,x,l_0,ddopller,10,0.05,m.radians(45),m.radians(30),10,1,0,3,2,2,2)
+
+URlst = [I,Q,U,V]
+
+for i in range(4):
+    plt.subplot(2,2,i+1)
+    plt.plot(x,URlst[i],label=Stokeslabel[i])
+    plt.legend(prop = {'size':4})
+plt.suptitle('Delta J = 0')
+plt.savefig('DeltaJ0.pdf')
+plt.show()
