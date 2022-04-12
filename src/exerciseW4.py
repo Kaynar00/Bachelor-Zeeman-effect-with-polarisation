@@ -19,8 +19,9 @@ L_l = 1
 L_u = 2
 S_l = 2
 S_u = 2
+noise = 1
 
-data = UR(a,b,B,x,l_0,ddopller,10,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2) + np.array([np.random.normal(size=x.size, scale=0.0001),np.random.normal(size=x.size, scale=0.0001),np.random.normal(size=x.size, scale=0.0001),np.random.normal(size=x.size, scale=0.0001)])
+data = UR(a,b,B,x,l_0,ddopller,10,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2) + np.array([np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise)])
 #print(len(data))
 datanorm = UR(a,b,B,x,l_0,ddopller,10,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2)
 #print(type(datanorm))
