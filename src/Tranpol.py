@@ -119,6 +119,13 @@ def Zeemansplit(J_l,J_u,L_l,L_u,S_l,S_u):
     S_u: The spin quantum number for the upper state
     Calculates the strength of each Zeeman components
     '''
+    J_l = int(J_l)
+    J_u = int(J_u)
+    L_l = int(L_l)
+    L_u = int(L_u)
+    S_l = int(S_l)
+    S_u = int(S_u)
+
     g_l = g(S_l,L_l,J_l)
     g_u = g(S_u,L_u,J_u)
 
@@ -224,6 +231,13 @@ def profilessum(v,v_A,v_B,J_l,J_u,L_l,L_u,S_l,S_u,aimag):
     aimag: the damping constant
     Calculates the profiles eta_b, eta_p, eta_r, rho_b, rho_p and rho_r
     '''
+    J_l = int(J_l)
+    J_u = int(J_u)
+    L_l = int(L_l)
+    L_u = int(L_u)
+    S_l = int(S_l)
+    S_u = int(S_u)
+
     M_l = list(range(-J_l,J_l+1))
     M_u = list(range(-J_u,J_u+1))
     eta_b = 0
@@ -339,9 +353,9 @@ def UR(a,b,B,l,l_0,ddopller,v_LOS,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u):
     '''
     a: the slope of the planckfunction
     b: value of planck function when optical depth is zero
-    B: The magnetic field [T]
-    l: wavelength
-    l_0: wavelength of the line
+    B: The magnetic field [G]
+    l: wavelength [Å]
+    l_0: wavelength of the line [Å]
     ddopller: Dopllerwidth of the line
     v_LOS: line of sight velocity [km/s]
     aimag: the damping constant times the imaginary number "j"
@@ -373,9 +387,9 @@ def UR_test(a,b,B,l,l_0,ddopller,v_LOS,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,
     '''
     a: the slope of the planckfunction
     b: value of planck function when optical depth is zero
-    B: The magnetic field [T]
-    l: wavelength
-    l_0: wavelength of the line
+    B: The magnetic field [G]
+    l: wavelength [Å]
+    l_0: wavelength of the line [Å]
     ddopller: Dopllerwidth of the line
     v_LOS: line of sight velocity [km/s]
     aimag: the damping constant times the imaginary number "j"
