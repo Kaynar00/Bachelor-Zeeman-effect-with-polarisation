@@ -1,3 +1,4 @@
+#%%
 import numpy as np
 from lmfit import minimize, Parameters, report_fit
 import math as m
@@ -19,8 +20,16 @@ L_u = 2
 S_l = 2
 S_u = 2
 
-data = UR(a,b,B,x,l_0,ddopller,10,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2) + np.random.normal(size=x.size, scale=0.001)
+data = UR(a,b,B,x,l_0,ddopller,10,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2) + np.array([np.random.normal(size=x.size, scale=0.0001),np.random.normal(size=x.size, scale=0.0001),np.random.normal(size=x.size, scale=0.0001),np.random.normal(size=x.size, scale=0.0001)])
+#print(len(data))
+datanorm = UR(a,b,B,x,l_0,ddopller,10,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2)
+#print(type(datanorm))
+#print(type(np.random.normal(size=x.size, scale=0.001)))
 
+#%%
+print(len(data[0]))
+
+#%%
 
 #define objective function: returns the array to be minimized
 def fcn2min(params, x, data):
@@ -39,14 +48,14 @@ def fcn2min(params, x, data):
 
 #Create a set of Parameters
 params = Parameters()
-params.add('a_',value=0.5,min=0,max=1)
-params.add('b_',value=0.5,min=0,max=1)
+params.add('a_',value=0.8,min=0.7,max=0.9)
+params.add('b_',value=0.2,min=0.1,max=0.3)
 params.add('B_',value=1000,min=900,max=2000)
 params.add('ddopller_',value=0.5,min=0,max=1)
 params.add('v_LOS',value=5,min=-30,max=30)
 params.add('aimag',value=0.5,min=0,max=1)
-params.add('theta',value=m.radians(90),min=0,max=m.radians(180))
-params.add('Xi',value=m.radians(45),min=0,max=m.radians(360))
+params.add('theta',value=m.radians(45),min=m.radians(40),max=m.radians(50))
+params.add('Xi',value=m.radians(30),min=m.radians(25),max=m.radians(35))
 params.add('eta_0',value=5,min=0,max=30)
 
 #do fit here with leastsq algorithm
@@ -54,12 +63,13 @@ result = minimize(fcn2min,params,args=(x,data))
 
 #calculate final result
 params_fit = result.params
-final = UR(params['a_'],params['b_'],params['B_'],x,l_0,params['ddopller_'],params['v_LOS'],params['aimag'],params['theta'],params['Xi'],params['eta_0'],J_l,J_u,L_l,L_u,S_l,S_u)
+final = UR(params_fit['a_'],params_fit['b_'],params_fit['B_'],x,l_0,params_fit['ddopller_'],params_fit['v_LOS'],params_fit['aimag'],params_fit['theta'],params_fit['Xi'],params_fit['eta_0'],J_l,J_u,L_l,L_u,S_l,S_u)
 report_fit(result)
 
 #Plot results
 for i in range(4):
     plt.subplot(2,2,i+1)
     plt.plot(x,data[i],'+')
+    plt.plot(x,datanorm[i])
     plt.plot(x,final[i])
 plt.show()

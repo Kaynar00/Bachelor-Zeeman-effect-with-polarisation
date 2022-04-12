@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from Tranpol import UR_test,UR
+from Tranpol import UR
 import math as m
 
 Stokes = np.load('src\stokes_milne.npy')

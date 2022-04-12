@@ -381,7 +381,7 @@ def UR(a,b,B,l,l_0,ddopller,v_LOS,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u):
     Q = -(delta**-1)*((hI**2)*hQ+hI*(hV*rU-hU*rV)+rQ*Pi)*a
     U = -(delta**-1)*((hI**2)*hU+hI*(hQ*rV-hV*rQ)+rU*Pi)*a
     V = -(delta**-1)*((hI**2)*hV+hI*(hU*rQ-hQ*rU)+rV*Pi)*a
-    return I,Q,U,V
+    return np.array([I,Q,U,V])
 
 def UR_test(a,b,B,l,l_0,ddopller,v_LOS,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u):
     '''
