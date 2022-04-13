@@ -5,12 +5,9 @@ import math as m
 from Tranpol import UR
 import matplotlib.pyplot as plt
 
-
-
-
-def inversion(a_,b_,B_,l_0_,ddopller_,v_LOS_,aimag_,theta_,Xi_,eta_0_,J_l,J_u,L_l,L_u,S_l,S_u,x_,data_):
+def inversion(params_,l_0_,J_l,J_u,L_l,L_u,S_l,S_u,x_,data_,weight_):
     #define objective function: returns the array to be minimized
-    def fcn2min(params, x_, data_):
+    def fcn2min(params, x_, data_,weight_):
         """Model a decaying sine wave and subtract data."""
         a__ = params['a_']
         b__ = params['b_']
@@ -22,28 +19,18 @@ def inversion(a_,b_,B_,l_0_,ddopller_,v_LOS_,aimag_,theta_,Xi_,eta_0_,J_l,J_u,L_
         Xi__ = params['Xi']
         eta_0__ = params['eta_0']
         model = UR(a__,b__,B__,x_,l_0_,ddopller__,v_LOS__,aimag__,theta__,Xi__,eta_0__,J_l,J_u,L_l,L_u,S_l,S_u)
-        return model - data_
-
-    #Create a set of Parameters
-    params = Parameters()
-    params.add('a_',value=a_,min=0.7,max=0.9)
-    params.add('b_',value=b_,min=0.1,max=0.3)
-    params.add('B_',value=B_,min=900,max=2000)
-    params.add('ddopller_',value=ddopller_,min=0,max=1)
-    params.add('v_LOS',value=v_LOS_,min=-30,max=30)
-    params.add('aimag',value=aimag_,min=0,max=1)
-    params.add('theta',value=theta_,min=m.radians(40),max=m.radians(50))
-    params.add('Xi',value=Xi_,min=m.radians(25),max=m.radians(35))
-    params.add('eta_0',value=eta_0_,min=0,max=30)
+        models = np.array(list(model[0])+list(model[1])+list(model[2])+list(model[3]))
+        return weight_*(models - data_)
 
     #do fit here with leastsq algorithm
-    result = minimize(fcn2min,params,args=(x_,data_))
+    result = minimize(fcn2min,params,args=(x_,data_,weight_))
 
     #calculate final result
     params_fit = result.params
     final = UR(params_fit['a_'],params_fit['b_'],params_fit['B_'],x,l_0,params_fit['ddopller_'],params_fit['v_LOS'],params_fit['aimag'],params_fit['theta'],params_fit['Xi'],params_fit['eta_0'],J_l,J_u,L_l,L_u,S_l,S_u)
+    finala = np.array(list(final[0])+list(final[1])+list(final[2])+list(final[3]))
 
-    return result, final
+    return result, finala
 
 if __name__ == '__main__':
     #Create data to be fitted
@@ -69,23 +56,45 @@ if __name__ == '__main__':
 
     data = UR(a,b,B,x,l_0,ddopller,10,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2) + np.array([np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise)])
     #print(len(data))
-    datanorm = UR(a,b,B,x,l_0,ddopller,10,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2)
+    #datanorm = UR(a,b,B,x,l_0,ddopller,10,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2)
     #print(type(datanorm))
     #print(type(np.random.normal(size=x.size, scale=0.001)))
 
+    #print(len(data[0]))
 
-    print(len(data[0]))
+    datar = data.reshape(data.shape[0]*data.shape[1])
 
-    result,final = inversion(a,b,B,l_0,ddopller,v_LOS,aimag,theta,Xi,eta_0,J_l,J_u,L_l,L_u,S_l,S_u,x,data)
+    #Create a set of Parameters
+    params = Parameters()
+    params.add('a_',value=a,min=0.7,max=0.9)
+    params.add('b_',value=b,min=0.1,max=0.3)
+    params.add('B_',value=B,min=900,max=2000)
+    params.add('ddopller_',value=ddopller,min=0,max=1)
+    params.add('v_LOS',value=v_LOS,min=-30,max=30)
+    params.add('aimag',value=aimag,min=0,max=1)
+    params.add('theta',value=theta,min=m.radians(40),max=m.radians(50))
+    params.add('Xi',value=Xi,min=m.radians(25),max=m.radians(35))
+    params.add('eta_0',value=eta_0,min=0,max=30)
+
+    #Weights
+    weight = np.ones_like(data)
+    weight[0,:] = 1. / np.max(np.abs(data[0,:]))
+    weight[1,:] = 1. / np.max(np.abs(data[1,:]))
+    weight[2,:] = 1. / np.max(np.abs(data[2,:]))
+    weight[3,:] = 1. / np.max(np.abs(data[3,:]))
+    weight = weight.reshape(weight.shape[0]*weight.shape[1])
+
+    result,final = inversion(params,l_0,J_l,J_u,L_l,L_u,S_l,S_u,x,data,weight)
 
     report_fit(result)
 
     #Plot results
+    finalr = final.reshape(data.shape[0],data.shape[1])
     for i in range(4):
         plt.subplot(2,2,i+1)
         plt.plot(x,data[i],'+',label='Data')
-        plt.plot(x,datanorm[i],label='Data without noise')
-        plt.plot(x,final[i],label='The fit')
+        #plt.plot(x,datanorm[i],label='Data without noise')
+        plt.plot(x,finalr[i],label='The fit')
         plt.legend(prop = {'size':4})
     plt.savefig('Spectrafit.pdf')
     plt.show()
