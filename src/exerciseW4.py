@@ -84,7 +84,7 @@ if __name__ == '__main__':
     weight[3,:] = 1. / np.max(np.abs(data[3,:]))
     weight = weight.reshape(weight.shape[0]*weight.shape[1])
 
-    result,final = inversion(params,l_0,J_l,J_u,L_l,L_u,S_l,S_u,x,data,weight)
+    result,final = inversion(params,l_0,J_l,J_u,L_l,L_u,S_l,S_u,x,datar,weight)
 
     report_fit(result)
 
@@ -98,3 +98,4 @@ if __name__ == '__main__':
         plt.legend(prop = {'size':4})
     plt.savefig('Spectrafit.pdf')
     plt.show()
+# %%
