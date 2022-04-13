@@ -19,7 +19,7 @@ L_l = 1
 L_u = 2
 S_l = 2
 S_u = 2
-noise = 1
+noise = 0.01
 
 data = UR(a,b,B,x,l_0,ddopller,10,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2) + np.array([np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise)])
 #print(len(data))
@@ -70,7 +70,9 @@ report_fit(result)
 #Plot results
 for i in range(4):
     plt.subplot(2,2,i+1)
-    plt.plot(x,data[i],'+')
-    plt.plot(x,datanorm[i])
-    plt.plot(x,final[i])
+    plt.plot(x,data[i],'+',label='Data')
+    plt.plot(x,datanorm[i],label='Data without noise')
+    plt.plot(x,final[i],label='The fit')
+    plt.legend(prop = {'size':4})
+plt.savefig('Spectrafit.pdf')
 plt.show()
