@@ -108,7 +108,7 @@ L_l = 1
 L_u = 2
 S_l = 2
 S_u = 2
-noise = 1e-1
+noise = 1e-5
 
 data = UR(a,b,B,x,l_0,ddopller,10,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2) + np.array([np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise)])
 #print(len(data))
@@ -155,7 +155,7 @@ for i in range(4):
     plt.plot(x,finalr[i],label='The fit')
     plt.legend(prop = {'size':4})
 plt.subplots_adjust(wspace = space + 0.12, hspace = space + 0.05)
-plt.savefig('Spectrafit2noise1.pdf')
+plt.savefig('Spectrafit2noise5.pdf')
 plt.show()
 
 # %%
@@ -188,7 +188,7 @@ L_l = 1
 L_u = 2
 S_l = 2
 S_u = 2
-noise = 1e-1
+noise = 1e-5
 
 data = UR(a,b,B,x,l_0,ddopller,10,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2) + np.array([np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise)])
 #print(len(data))
@@ -235,6 +235,6 @@ for i in range(4):
     plt.plot(x,finalr[i],label='The fit')
     plt.legend(prop = {'size':4})
 plt.subplots_adjust(wspace = space + 0.12, hspace = space + 0.05)
-plt.savefig('Spectrafit3noise1.pdf')
+plt.savefig('Spectrafit3noise5.pdf')
 plt.show()
 # %%
