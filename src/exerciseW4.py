@@ -1,10 +1,11 @@
 #%%
 from inversion import inversion
-from lmfit import Parameters, report_fit
+from lmfit import Parameters, report_fit, fit_report
 from Tranpol import UR
 import numpy as np
 import math as m
 import matplotlib.pyplot as plt
+import json
 
 Stokeslabel = ['I','Q','U','V']
 space = 0.3
@@ -64,6 +65,9 @@ result,final = inversion(params,l_0,J_l,J_u,L_l,L_u,S_l,S_u,x,datar,weight,"leas
 
 report_fit(result)
 
+with open("spectrafit.txt","w") as f:
+    f.write(fit_report(result))
+
 #Plot results
 finalr = final.reshape(data.shape[0],data.shape[1])
 for i in range(4):
@@ -81,6 +85,7 @@ plt.show()
 #%%
 from inversion import inversion
 from lmfit import Parameters, report_fit
+from lmfit.model import save_modelresult
 from Tranpol import UR
 import numpy as np
 import math as m
@@ -108,7 +113,7 @@ L_l = 1
 L_u = 2
 S_l = 2
 S_u = 2
-noise = 1e-5
+noise = 1e-1
 
 data = UR(a,b,B,x,l_0,ddopller,10,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2) + np.array([np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise)])
 #print(len(data))
@@ -144,6 +149,9 @@ result,final = inversion(params,l_0,J_l,J_u,L_l,L_u,S_l,S_u,x,datar,weight,"leas
 
 report_fit(result)
 
+with open("spectrafit2noise1.txt","w") as f:
+    f.write(fit_report(result))
+
 #Plot results
 finalr = final.reshape(data.shape[0],data.shape[1])
 for i in range(4):
@@ -155,7 +163,7 @@ for i in range(4):
     plt.plot(x,finalr[i],label='The fit')
     plt.legend(prop = {'size':4})
 plt.subplots_adjust(wspace = space + 0.12, hspace = space + 0.05)
-plt.savefig('Spectrafit2noise5.pdf')
+plt.savefig('Spectrafit2noise1.pdf')
 plt.show()
 
 # %%
@@ -188,7 +196,7 @@ L_l = 1
 L_u = 2
 S_l = 2
 S_u = 2
-noise = 1e-5
+noise = 1e-1
 
 data = UR(a,b,B,x,l_0,ddopller,10,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2) + np.array([np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise),np.random.normal(size=x.size, scale=noise)])
 #print(len(data))
@@ -224,6 +232,9 @@ result,final = inversion(params,l_0,J_l,J_u,L_l,L_u,S_l,S_u,x,datar,weight,"leas
 
 report_fit(result)
 
+with open("spectrafit3noise1.txt","w") as f:
+    f.write(fit_report(result))
+
 #Plot results
 finalr = final.reshape(data.shape[0],data.shape[1])
 for i in range(4):
@@ -235,6 +246,6 @@ for i in range(4):
     plt.plot(x,finalr[i],label='The fit')
     plt.legend(prop = {'size':4})
 plt.subplots_adjust(wspace = space + 0.12, hspace = space + 0.05)
-plt.savefig('Spectrafit3noise5.pdf')
+plt.savefig('Spectrafit3noise1.pdf')
 plt.show()
 # %%
