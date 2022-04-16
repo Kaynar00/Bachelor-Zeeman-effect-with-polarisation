@@ -1,0 +1,46 @@
+[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 41
+    # data points      = 200
+    # variables        = 9
+    chi-square         = 0.04617701
+    reduced chi-square = 2.4176e-04
+    Akaike info crit   = -1656.71812
+    Bayesian info crit = -1627.03327
+[[Variables]]
+    a_:         0.79862491 +/- 0.00982368 (1.23%) (init = 0.5)
+    b_:         0.20104844 +/- 0.00933671 (4.64%) (init = 0.5)
+    B_:         997.713812 +/- 9.32129321 (0.93%) (init = 1000)
+    ddopller_:  0.09983392 +/- 6.2504e-04 (0.63%) (init = 0.1)
+    v_LOS:      9.97106656 +/- 0.01319016 (0.13%) (init = 10)
+    aimag:      0.04891236 +/- 0.00634202 (12.97%) (init = 0.05)
+    theta:      0.78400360 +/- 0.00515056 (0.66%) (init = 0.7853982)
+    Xi:         0.52106944 +/- 0.00244596 (0.47%) (init = 0.5235988)
+    eta_0:      10.0443004 +/- 0.30709299 (3.06%) (init = 10)
+[[Correlations]] (unreported correlations are < 0.100)
+    C(a_, b_)           = -0.963
+    C(ddopller_, eta_0) = -0.891
+    C(ddopller_, aimag) = -0.833
+    C(a_, B_)           = -0.754
+    C(b_, B_)           = 0.746
+    C(theta, Xi)        = 0.725
+    C(B_, theta)        = -0.652
+    C(a_, theta)        = 0.646
+    C(b_, theta)        = -0.639
+    C(aimag, eta_0)     = 0.625
+    C(b_, eta_0)        = 0.601
+    C(a_, Xi)           = 0.596
+    C(b_, Xi)           = -0.590
+    C(a_, eta_0)        = -0.519
+    C(theta, eta_0)     = -0.484
+    C(b_, ddopller_)    = -0.481
+    C(Xi, eta_0)        = -0.477
+    C(B_, ddopller_)    = -0.403
+    C(ddopller_, theta) = 0.393
+    C(B_, Xi)           = -0.389
+    C(B_, aimag)        = 0.389
+    C(a_, ddopller_)    = 0.387
+    C(B_, eta_0)        = 0.347
+    C(ddopller_, Xi)    = 0.321
+    C(b_, aimag)        = 0.206
+    C(aimag, theta)     = -0.143
