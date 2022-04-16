@@ -5,7 +5,7 @@ import math as m
 from Tranpol import UR
 import matplotlib.pyplot as plt
 
-def inversion(params_,l_0_,J_l,J_u,L_l,L_u,S_l,S_u,x_,data_,weight_):
+def inversion(params_,l_0_,J_l,J_u,L_l,L_u,S_l,S_u,x_,data_,weight_,method):
     #define objective function: returns the array to be minimized
     def fcn2min(params, x_, data_,weight_):
         """Model a decaying sine wave and subtract data."""
@@ -23,7 +23,7 @@ def inversion(params_,l_0_,J_l,J_u,L_l,L_u,S_l,S_u,x_,data_,weight_):
         return weight_*(models - data_)
 
     #do fit here with leastsq algorithm
-    result = minimize(fcn2min,params_,args=(x_,data_,weight_))
+    result = minimize(fcn2min,params_,args=(x_,data_,weight_),method = method)
 
     #calculate final result
     params_fit = result.params
