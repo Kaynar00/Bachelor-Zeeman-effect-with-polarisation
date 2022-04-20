@@ -84,8 +84,7 @@ plt.show()
 
 #%%
 from inversion import inversion
-from lmfit import Parameters, report_fit
-from lmfit.model import save_modelresult
+from lmfit import Parameters, report_fit, fit_report
 from Tranpol import UR
 import numpy as np
 import math as m
@@ -168,7 +167,7 @@ plt.show()
 
 # %%
 from inversion import inversion
-from lmfit import Parameters, report_fit
+from lmfit import Parameters, report_fit, fit_report
 from Tranpol import UR
 import numpy as np
 import math as m
