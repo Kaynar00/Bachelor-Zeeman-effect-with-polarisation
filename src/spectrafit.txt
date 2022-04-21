@@ -1,45 +1,29 @@
 [[Fit Statistics]]
     # fitting method   = leastsq
-    # function evals   = 41
+    # function evals   = 17
     # data points      = 200
     # variables        = 9
-    chi-square         = 2.70108056
-    reduced chi-square = 0.01414178
-    Akaike info crit   = -842.933093
-    Bayesian info crit = -813.248237
+    chi-square         = 12.4444363
+    reduced chi-square = 0.06515412
+    Akaike info crit   = -537.408745
+    Bayesian info crit = -507.723889
+##  Warning: uncertainties could not be estimated:
+    a_:         at initial value
+    b_:         at initial value
+    B_:         at boundary
+    ddopller_:  at initial value
+    v_LOS:      at initial value
+    aimag:      at initial value
+    theta:      at initial value
+    Xi:         at initial value
+    eta_0:      at initial value
 [[Variables]]
-    a_:         0.80154125 +/- 0.07606916 (9.49%) (init = 0.8)
-    b_:         0.20231022 +/- 0.07200944 (35.59%) (init = 0.2)
-    B_:         1051.37743 +/- 75.9358408 (7.22%) (init = 1000)
-    ddopller_:  0.09794440 +/- 0.00486246 (4.96%) (init = 0.1)
-    v_LOS:      9.89746501 +/- 0.10689687 (1.08%) (init = 10)
-    aimag:      0.08786358 +/- 0.05188330 (59.05%) (init = 0.05)
-    theta:      0.79132460 +/- 0.03932034 (4.97%) (init = 0.7853982)
-    Xi:         0.49542179 +/- 0.02018872 (4.08%) (init = 0.5235988)
-    eta_0:      10.0514676 +/- 2.34775046 (23.36%) (init = 10)
-[[Correlations]] (unreported correlations are < 0.100)
-    C(a_, b_)           = -0.963
-    C(ddopller_, eta_0) = -0.875
-    C(ddopller_, aimag) = -0.815
-    C(a_, B_)           = -0.745
-    C(b_, B_)           = 0.735
-    C(theta, Xi)        = 0.653
-    C(a_, theta)        = 0.649
-    C(b_, theta)        = -0.641
-    C(B_, theta)        = -0.635
-    C(b_, eta_0)        = 0.596
-    C(aimag, eta_0)     = 0.572
-    C(a_, Xi)           = 0.525
-    C(b_, Xi)           = -0.519
-    C(a_, eta_0)        = -0.510
-    C(theta, eta_0)     = -0.469
-    C(b_, ddopller_)    = -0.462
-    C(Xi, eta_0)        = -0.404
-    C(B_, ddopller_)    = -0.377
-    C(B_, aimag)        = 0.373
-    C(a_, ddopller_)    = 0.366
-    C(ddopller_, theta) = 0.366
-    C(B_, Xi)           = -0.317
-    C(B_, eta_0)        = 0.313
-    C(ddopller_, Xi)    = 0.243
-    C(b_, aimag)        = 0.166
+    a_:         0.80000000 (init = 0.8)
+    b_:         0.20000000 (init = 0.2)
+    B_:         0.00000000 (init = 0)
+    ddopller_:  0.10000000 (init = 0.1)
+    v_LOS:      10.0000000 (init = 10)
+    aimag:      0.05000000 (init = 0.05)
+    theta:      0.78539816 (init = 0.7853982)
+    Xi:         0.52359878 (init = 0.5235988)
+    eta_0:      10.0000000 (init = 10)
