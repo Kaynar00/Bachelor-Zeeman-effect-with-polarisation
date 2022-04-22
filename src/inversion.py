@@ -1,12 +1,25 @@
-
+#%%
 import numpy as np
 from lmfit import minimize, Parameters, report_fit
 import math as m
 from Tranpol import UR
 import matplotlib.pyplot as plt
 
-def inversion(params_,l_0_,J_l,J_u,L_l,L_u,S_l,S_u,x_,data_,weight_,method):
-    #define objective function: returns the array to be minimized
+def inversion(params_,l_0_,J_l,J_u,L_l,L_u,S_l,S_u,x_,data_,weight_):
+    """
+    params_: Class Parameters with all the initial starting values and their limits
+    l_0: rest wavelength
+    J_l: the rotational quantum nuber for lower state
+    J_u: the rotational quantumb number for upper state
+    L_l: the angular momentum quantum number for lower state
+    L_u: the angular momentum quantum number for upper state
+    S_l: the spin quantum number for lower state
+    S_u: the spin quantum number for upper state
+    x_: All the wavelengths that where measured
+    data_: Measured data
+    method: Minimization method (Different methods can be found at https://lmfit.github.io/lmfit-py/fitting.html under \"Choosing Different Fitting Methods\" and should be inputted as a string)
+    Minimizes the Unno-Rachkovsky model so that its as similar as possible to the data and then spots out the minimized parameters
+    """
     def fcn2min(params, x_, data_,weight_):
         """Model a decaying sine wave and subtract data."""
         a__ = params['a_']
@@ -23,7 +36,7 @@ def inversion(params_,l_0_,J_l,J_u,L_l,L_u,S_l,S_u,x_,data_,weight_,method):
         return weight_*(models - data_)
 
     #do fit here with leastsq algorithm
-    result = minimize(fcn2min,params_,args=(x_,data_,weight_),method = method)
+    result = minimize(fcn2min,params_,args=(x_,data_,weight_))
 
     #calculate final result
     params_fit = result.params

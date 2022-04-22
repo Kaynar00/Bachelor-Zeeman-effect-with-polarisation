@@ -162,7 +162,7 @@ for i in range(4):
     plt.ylabel(Stokeslabel[i])
     plt.legend(prop = {'size':4})
 plt.subplots_adjust(wspace = space + 0.1, hspace = space)
-plt.suptitle('Exercise 4')
+plt.suptitle('Exercise 5')
 plt.savefig('ExerciseW3_5.pdf')
 plt.show()
 
