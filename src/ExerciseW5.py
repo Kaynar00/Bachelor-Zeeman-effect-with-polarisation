@@ -13,7 +13,8 @@ cavity = np.load(r"C:\Users\keyur\OneDrive\Dokument\Zeemandata\cavity_map.npy")
 
 # %%
 
-
+plt.imshow(obstokes[0,0,:,:])
+plt.show()
 
 #exercise
 xvalue = 100
