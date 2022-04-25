@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from inversion import inversion
 from lmfit import Parameters, report_fit, fit_report
 import math as m
+from tqdm import tqdm
 
 
 obstokes = np.load(r"C:\Users\keyur\OneDrive\Dokument\Zeemandata\observed_stokes.npy")
@@ -58,6 +59,9 @@ params.add('eta_0',value=10,min=0,max=30)
 result, finala = inversion(params,l_0,J_l,J_u,L_l,L_u,S_l,S_u,obwaves[:15],datar,weight)
 
 report_fit(result)
+
+with open("umbra.txt","w") as f:
+    f.write(fit_report(result))
 # %%
 plt.imshow(obstokes[0,0,:,:])
 plt.show()
@@ -105,6 +109,8 @@ result, finala = inversion(params,l_0,J_l,J_u,L_l,L_u,S_l,S_u,obwaves[:15],datar
 
 report_fit(result)
 
+with open("quietsun.txt","w") as f:
+    f.write(fit_report(result))
 # %%
 
 plt.imshow(obstokes[0,0,:,:])
@@ -152,3 +158,15 @@ params.add('eta_0',value=10,min=0,max=30)
 result, finala = inversion(params,l_0,J_l,J_u,L_l,L_u,S_l,S_u,obwaves[:15],datar,weight)
 
 report_fit(result)
+
+with open("penumbra.txt","w") as f:
+    f.write(fit_report(result))
+# %%
+#exercise 2
+
+skip_factor = 7
+sdata = obstokes[:,:15,0::skip_factor,0::skip_factor]
+
+result = np.empty((932,918,9))
+        
+# %%
