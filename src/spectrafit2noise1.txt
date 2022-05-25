@@ -1,43 +1,21 @@
 [[Fit Statistics]]
     # fitting method   = leastsq
-    # function evals   = 7334
+    # function evals   = 1264
     # data points      = 200
     # variables        = 9
-    chi-square         = 24.0393317
-    reduced chi-square = 0.12586038
-    Akaike info crit   = -405.725212
-    Bayesian info crit = -376.040355
+    chi-square         = 26.6993737
+    reduced chi-square = 0.13978730
+    Akaike info crit   = -384.735452
+    Bayesian info crit = -355.050596
+##  Warning: uncertainties could not be estimated:
+    Xi:         at boundary
 [[Variables]]
-    a_:         0.77132338 +/- 0.34040369 (44.13%) (init = 0.5)
-    b_:         0.24232033 +/- 0.34097304 (140.71%) (init = 0.5)
-    B_:         1713.17487 +/- 834.713688 (48.72%) (init = 1000)
-    ddopller_:  0.05712847 +/- 0.03636838 (63.66%) (init = 0.1)
-    v_LOS:      10.8944039 +/- 0.87522809 (8.03%) (init = 10)
-    aimag:      0.11729977 +/- 0.31960736 (272.47%) (init = 0.05)
-    theta:      1.73718548 +/- 0.15089549 (8.69%) (init = 0.7853982)
-    Xi:         2.4985e-08 +/- 0.19705719 (788711536.03%) (init = 0.5235988)
-    eta_0:      29.9128068 +/- 89.6326368 (299.65%) (init = 10)
-[[Correlations]] (unreported correlations are < 0.100)
-    C(a_, b_)           = -0.970
-    C(ddopller_, eta_0) = -0.810
-    C(b_, eta_0)        = 0.798
-    C(a_, eta_0)        = -0.733
-    C(b_, ddopller_)    = -0.632
-    C(B_, aimag)        = 0.632
-    C(a_, ddopller_)    = 0.543
-    C(ddopller_, aimag) = -0.464
-    C(Xi, eta_0)        = -0.292
-    C(B_, ddopller_)    = -0.283
-    C(b_, Xi)           = -0.260
-    C(a_, Xi)           = 0.257
-    C(a_, theta)        = -0.249
-    C(b_, theta)        = 0.247
-    C(theta, Xi)        = -0.245
-    C(theta, eta_0)     = 0.215
-    C(a_, aimag)        = 0.197
-    C(ddopller_, Xi)    = 0.168
-    C(aimag, Xi)        = 0.145
-    C(B_, eta_0)        = -0.133
-    C(ddopller_, theta) = -0.129
-    C(B_, theta)        = -0.120
-    C(B_, Xi)           = 0.104
+    a_:         0.70828716 (init = 0.5)
+    b_:         0.29443044 (init = 0.5)
+    B_:         1297.45158 (init = 1000)
+    ddopller_:  0.14087377 (init = 0.1)
+    v_LOS:      8.61012432 (init = 10)
+    aimag:      1.1195e-08 (init = 0.05)
+    theta:      0.54017590 (init = 0.7853982)
+    Xi:         3.4879e-16 (init = 0.5235988)
+    eta_0:      7.79502651 (init = 10)
