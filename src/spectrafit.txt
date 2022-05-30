@@ -3,10 +3,10 @@
     # function evals   = 17
     # data points      = 200
     # variables        = 9
-    chi-square         = 12.9826893
-    reduced chi-square = 0.06797220
-    Akaike info crit   = -528.940097
-    Bayesian info crit = -499.255241
+    chi-square         = 14.4781425
+    reduced chi-square = 0.07580179
+    Akaike info crit   = -507.135453
+    Bayesian info crit = -477.450597
 ##  Warning: uncertainties could not be estimated:
     a_:         at initial value
     b_:         at initial value
