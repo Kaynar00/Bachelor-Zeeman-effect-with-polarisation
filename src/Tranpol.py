@@ -169,7 +169,7 @@ def Zeemansplittest(J_l,J_u,L_l,L_u,S_l,S_u):
             plt.bar(split[i],comp[i],width = 0.1,color = 'g')
         elif sigma_r[i] == True:
             plt.bar(split[i],comp[i],width = 0.1,color = 'r')
-    plt.xlabel('$\lambda (g_l*M_l-g_u*M_u)$')
+    plt.xlabel('$\lambda (g_lM_l-g_uM_u)$')
     plt.ylabel('Strength')
     plt.savefig('Zeemansplit.pdf')
     plt.show()
