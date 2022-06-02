@@ -480,9 +480,6 @@ for i in range(9):
     elif i == 3:
         plt.imshow(result[:,:,i],interpolation = None,vmax=0.06)
         cbar = plt.colorbar(label=units[i])
-    elif i == 5:
-        plt.imshow(result[:,:,i],interpolation = None,vmax=2)
-        cbar = plt.colorbar(label=units[i])
     elif i == 6:
         plt.imshow(result[:,:,i],cmap = 'RdYlGn',interpolation = None)
         cbar = plt.colorbar(label=units[i])
