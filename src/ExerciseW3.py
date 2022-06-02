@@ -20,10 +20,13 @@ import math as m
 #Exercise 2
 
 Stokes = np.load('stokes_milne.npy')
-Stokeslabel = ['I','Q','U','V']
+Stokeslabel = ['I/lc','Q/lc','U/lc','V/lc']
 
-x = np.arange(6301.5-1,6301.5+1,0.04)
 l_0 = 6301.5
+lambdaStart = 6300.8
+lambdaStep = 0.03
+nLambda = 50
+x = np.arange(lambdaStart,nLambda*lambdaStep+lambdaStart,lambdaStep)
 ddopller = 0.1
 B = 1000
 a = 0.8
@@ -37,12 +40,11 @@ URlst = [I2,Q2,U2,V2]
 for i in range(4):
     plt.subplot(2,2,i+1)
     plt.plot(x,Stokes[i],label=Stokeslabel[i])
-    plt.plot(x,URlst[i],label='Keyurs '+Stokeslabel[i])
+    plt.plot(x,URlst[i],ls='--',label=Stokeslabel[i])
     plt.xlabel('Wavelength')
     plt.ylabel(Stokeslabel[i])
     plt.legend(prop = {'size':4})
-plt.suptitle('Exercise 2')
-plt.subplots_adjust(wspace = space + 0.1, hspace = space)
+plt.subplots_adjust(wspace = space + 0.1, hspace = space+0.1)
 plt.savefig('ExerciseW3_2.pdf')
 plt.show()
 
@@ -65,21 +67,21 @@ UR3000lst = [I3000,Q3000,U3000,V3000]
 
 for i in range(4):
     plt.subplot(2,2,i+1)
-    plt.plot(x,URlst[i],label='Exercise 2 '+Stokeslabel[i])
-    plt.plot(x,UR3lst[i],label='Exercise 3 '+Stokeslabel[i]+', B=10G')
-    plt.plot(x,UR3000lst[i],label='Exercise 3 '+Stokeslabel[i]+', B=10000G')
-    plt.plot(x,UR10000lst[i],label='Exercise 3 '+Stokeslabel[i]+', B=10000G but 5D2-7D3')
+    plt.plot(x-6301.5,UR3lst[i],label=Stokeslabel[i]+', B=10G')
+    plt.plot(x-6301.5,URlst[i],label=Stokeslabel[i]+', B=1000')
+    plt.plot(x-6301.5,UR3000lst[i],label=Stokeslabel[i]+', B=10000G')
+    plt.plot(x-6301.5,UR10000lst[i],label=Stokeslabel[i]+', B=10000G but 5D2-7D3')
     plt.xlabel('Wavelength')
     plt.ylabel(Stokeslabel[i])
     plt.legend(prop = {'size':4})
 plt.subplots_adjust(wspace = space + 0.1, hspace = space)
-plt.suptitle('Exercise 3')
+plt.suptitle('Changing the magnetic field')
 plt.savefig('ExerciseW3_3.pdf')
 plt.show()
 
 for i in range(4):
     plt.subplot(2,2,i+1)
-    plt.plot(x2,UR10000lst[i],label='Exercise 3 '+Stokeslabel[i]+', B=10000G but 5D2-7D3')
+    plt.plot(x2,UR10000lst[i],label=''+Stokeslabel[i]+', B=10000G but 5D2-7D3')
     plt.xlabel('Wavelength')
     plt.ylabel(Stokeslabel[i])
     plt.legend(prop = {'size':4})
@@ -115,20 +117,20 @@ for i in range(4):
     plt.subplot(2,2,i+1)
     #plt.plot(x,URlst[i],label='Exercise 2 '+Stokeslabel[i])
     #plt.plot(x,UR3lst[i],label='Exercise 3 '+Stokeslabel[i])
-    plt.plot(x,UR40lst[i],label='Exercise 4, Xi=0 '+Stokeslabel[i])
-    plt.plot(x,UR445lst[i],label='Exercise 4, Xi=45 '+Stokeslabel[i])
-    plt.plot(x,UR490lst[i],label='Exercise 4, Xi=90 '+Stokeslabel[i])
-    plt.plot(x,UR4135lst[i],label='Exercise 4, Xi=135 '+Stokeslabel[i])
-    plt.plot(x,UR4180lst[i],label='Exercise 4, Xi=180 '+Stokeslabel[i])
-    plt.plot(x,UR4225lst[i],label='Exercise 4, Xi=225 '+Stokeslabel[i])
-    plt.plot(x,UR4270lst[i],label='Exercise 4, Xi=270 '+Stokeslabel[i])
-    plt.plot(x,UR4315lst[i],label='Exercise 4, Xi=315 '+Stokeslabel[i])
-    plt.plot(x,UR4360lst[i],label='Exercise 4, Xi=360 '+Stokeslabel[i])
+    plt.plot(x,UR40lst[i],label='$\chi$=0 '+Stokeslabel[i])
+    plt.plot(x,UR445lst[i],label='$\chi$=45 '+Stokeslabel[i])
+    plt.plot(x,UR490lst[i],label='$\chi$=90 '+Stokeslabel[i])
+    plt.plot(x,UR4135lst[i],label='$\chi$=135 '+Stokeslabel[i])
+    plt.plot(x,UR4180lst[i],label='$\chi$=180 '+Stokeslabel[i])
+    plt.plot(x,UR4225lst[i],ls='--',label='$\chi$=225 '+Stokeslabel[i])
+    plt.plot(x,UR4270lst[i],ls='--',label='$\chi$=270 '+Stokeslabel[i])
+    plt.plot(x,UR4315lst[i],ls='--',label='$\chi$=315 '+Stokeslabel[i])
+    plt.plot(x,UR4360lst[i],ls='--',label='$\chi$=360 '+Stokeslabel[i])
     plt.xlabel('Wavelength')
     plt.ylabel(Stokeslabel[i])
-    plt.legend(prop = {'size':3},loc=4)
+    plt.legend(prop = {'size':4},loc=4)
 plt.subplots_adjust(wspace = space + 0.1, hspace = space)
-plt.suptitle('Exercise 4')
+plt.suptitle('Changing $\chi$')
 plt.savefig('ExerciseW3_4.pdf')
 plt.show()
 
@@ -149,20 +151,20 @@ UR5180lst = UR(a,b,B,x,l_0,ddopller,0,0.05,m.radians(180),m.radians(30),10,2,2,1
 UR50lst = [I50,Q50,U50,V50]
 UR545lst = [I545,Q545,U545,V545]
 UR590lst = [I590,Q590,U590,V590]
-UR5135lst = UR(a,b,B,x,l_0,ddopller,0,0.05,m.radians(180),m.radians(30),10,2,2,1,2,2,2)
+UR5135lst = UR(a,b,B,x,l_0,ddopller,0,0.05,m.radians(135),m.radians(30),10,2,2,1,2,2,2)
 
 for i in range(4):
     plt.subplot(2,2,i+1)
-    plt.plot(x,UR50lst[i],label='Exercise 5, Theta=0 '+Stokeslabel[i])
-    plt.plot(x,UR545lst[i],label='Exercise 5, Theta=45 '+Stokeslabel[i])
-    plt.plot(x,UR590lst[i],label='Exercise 5, Theta=90 '+Stokeslabel[i])
-    plt.plot(x,UR5135lst[i],label='Exercise 5, Theta=135 '+Stokeslabel[i])
-    plt.plot(x,UR5180lst[i],label='Exercise 5, Theta=180 '+Stokeslabel[i])
+    plt.plot(x,UR50lst[i],label='$\Theta$=0 '+Stokeslabel[i])
+    plt.plot(x,UR545lst[i],label='$\Theta$=45 '+Stokeslabel[i])
+    plt.plot(x,UR590lst[i],label='$\Theta$=90 '+Stokeslabel[i])
+    plt.plot(x,UR5135lst[i],label='$\Theta$=135 '+Stokeslabel[i])
+    plt.plot(x,UR5180lst[i],label='$\Theta$=180 '+Stokeslabel[i])
     plt.xlabel('Wavelength')
     plt.ylabel(Stokeslabel[i])
-    plt.legend(prop = {'size':4})
-plt.subplots_adjust(wspace = space + 0.1, hspace = space)
-plt.suptitle('Exercise 5')
+    plt.legend(prop = {'size':3})
+plt.subplots_adjust(wspace = space + 0.1, hspace = space + 0.1)
+plt.suptitle('Changing $\Theta$')
 plt.savefig('ExerciseW3_5.pdf')
 plt.show()
 
@@ -205,37 +207,37 @@ URa1lst = [Ia1,Qa1,Ua1,Va1]
 #Plotting
 for i in range(4):
     plt.subplot(2,2,i+1)
-    plt.plot(x,URlst[i],label=Stokeslabel[i])
-    plt.plot(x,URv1lst[i],label = 'v_LOS=1, '+Stokeslabel[i])
-    plt.plot(x,URv20lst[i],label = 'v_LOS=20, '+Stokeslabel[i])
-    plt.plot(x,URvm1lst[i],label = 'v_LOS=-1, '+Stokeslabel[i])
-    plt.plot(x,URvm20lst[i],label = 'v_LOS=-20, '+Stokeslabel[i])
+    plt.plot(x,URlst[i],label='$v_{LOS}$=10km/s, '+Stokeslabel[i])
+    plt.plot(x,URv1lst[i],label = '$v_{LOS}$=1km/s, '+Stokeslabel[i])
+    plt.plot(x,URv20lst[i],label = '$v_{LOS}$=20km/s, '+Stokeslabel[i])
+    plt.plot(x,URvm1lst[i],label = '$v_{LOS}$=-1km/s, '+Stokeslabel[i])
+    plt.plot(x,URvm20lst[i],label = '$v_{LOS}$=-20km/s, '+Stokeslabel[i])
     plt.xlabel('Wavelength')
     plt.ylabel(Stokeslabel[i])
     plt.legend(prop = {'size':4})
 plt.subplots_adjust(wspace = space + 0.1, hspace = space)
-plt.suptitle('Changing v_LOS')
+plt.suptitle('Changing $v_{LOS}$')
 plt.savefig('Changing_v_LOS.pdf')
 plt.show()
 
 
 for i in range(4):
     plt.subplot(2,2,i+1)
-    plt.plot(x,URlst[i],label=Stokeslabel[i])
-    plt.plot(x,URdopller01lst[i],label = 'ddopller=0.1, '+Stokeslabel[i])
-    plt.plot(x,URdopller05lst[i],label = 'ddopller=0.5, '+Stokeslabel[i])
-    plt.plot(x,URdopller1lst[i],label = 'ddopller=1, '+Stokeslabel[i])
+    #plt.plot(x,URlst[i],label=Stokeslabel[i])
+    plt.plot(x,URdopller01lst[i],label = '$\Delta\lambda_D$=0.1, '+Stokeslabel[i])
+    plt.plot(x,URdopller05lst[i],label = '$\Delta\lambda_D$=0.5, '+Stokeslabel[i])
+    plt.plot(x,URdopller1lst[i],label = '$\Delta\lambda_D$=1, '+Stokeslabel[i])
     plt.xlabel('Wavelength')
     plt.ylabel(Stokeslabel[i])
     plt.legend(prop = {'size':4})
 plt.subplots_adjust(wspace = space + 0.1, hspace = space)
-plt.suptitle('Changing ddopller')
+plt.suptitle('Changing $\Delta\lambda_D$')
 plt.savefig('Changing_ddopller.pdf')
 plt.show()
 
 for i in range(4):
     plt.subplot(2,2,i+1)
-    plt.plot(x,URlst[i],label=Stokeslabel[i])
+    plt.plot(x,URlst[i],label= 'damping = 0.05, ' + Stokeslabel[i])
     plt.plot(x,URa02lst[i],label = 'damping = 0.2, '+Stokeslabel[i])
     plt.plot(x,URa05lst[i],label = 'damping = 0.5, '+Stokeslabel[i])
     plt.plot(x,URa1lst[i],label = 'damping = 1, '+Stokeslabel[i])
@@ -288,15 +290,15 @@ URa1lst = [Ia1,Qa1,Ua1,Va1]
 for i in range(4):
     plt.subplot(2,2,i+1)
     plt.plot(x2,URlst[i],label=Stokeslabel[i])
-    plt.plot(x2,URv1lst[i],label = 'v_LOS=0.1, '+Stokeslabel[i])
-    plt.plot(x2,URv20lst[i],label = 'v_LOS=20, '+Stokeslabel[i])
-    plt.plot(x2,URvm1lst[i],label = 'v_LOS=-1, '+Stokeslabel[i])
-    plt.plot(x2,URvm20lst[i],label = 'v_LOS=-20, '+Stokeslabel[i])
+    plt.plot(x2,URv1lst[i],label = '$v_{LOS}$=0.1, '+Stokeslabel[i])
+    plt.plot(x2,URv20lst[i],label = '$v_{LOS}$=20, '+Stokeslabel[i])
+    plt.plot(x2,URvm1lst[i],label = '$v_{LOS}$=-1, '+Stokeslabel[i])
+    plt.plot(x2,URvm20lst[i],label = '$v_{LOS}$=-20, '+Stokeslabel[i])
     plt.xlabel('Wavelength')
     plt.ylabel(Stokeslabel[i])
     plt.legend(prop = {'size':4})
 plt.subplots_adjust(wspace = space + 0.3, hspace = space)
-plt.suptitle('Changing v_LOS')
+plt.suptitle('Changing $v_{LOS}$')
 plt.savefig('v_LOS2.pdf')
 plt.show()
 
@@ -304,14 +306,14 @@ plt.show()
 for i in range(4):
     plt.subplot(2,2,i+1)
     plt.plot(x2,URlst[i],label=Stokeslabel[i])
-    plt.plot(x2,URdopller01lst[i],label = 'ddopller=0.1, '+Stokeslabel[i])
-    plt.plot(x2,URdopller05lst[i],label = 'ddopller=0.5, '+Stokeslabel[i])
-    plt.plot(x2,URdopller1lst[i],label = 'ddopller=1, '+Stokeslabel[i])
+    plt.plot(x2,URdopller01lst[i],label = '$\Delta\lambda_D$=0.1, '+Stokeslabel[i])
+    plt.plot(x2,URdopller05lst[i],label = '$\Delta\lambda_D$=0.5, '+Stokeslabel[i])
+    plt.plot(x2,URdopller1lst[i],label = '$\Delta\lambda_D$=1, '+Stokeslabel[i])
     plt.xlabel('Wavelength')
     plt.ylabel(Stokeslabel[i])
     plt.legend(prop = {'size':4})
 plt.subplots_adjust(wspace = space + 0.3, hspace = space)
-plt.suptitle('Changing ddopller')
+plt.suptitle('Changing $\Delta\lambda_D$')
 plt.savefig('ddopller2.pdf')
 plt.show()
 

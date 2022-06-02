@@ -20,14 +20,44 @@ plt.show()
 for y in tqdm(range(134)):
     for x in range (132):
         skip_factor = 7
-        cm = cavity[0::skip_factor, 0::skip_factor]
+        cm = cavity[::skip_factor, ::skip_factor]
         l0 = 6301.5 # reference waveleght
         cc = 3e5 # light speed
         result[y,x,4] = result[y,x,4] + cm[y,x]/l0*cc
 
-np.save('result.npy',result)
+np.save('resultcavity.npy',result)
 # %%
-result = np.load('result.npy')
+result = np.load('resultcavity.npy')
+
+name = ['$S_1$','$S_0$','$B$','$\Delta\lambda_D$','$v_{LOS}$','$a_D$',r'$\theta$',r'$\chi$','$\eta_0$']
+units = ['$(1)$','$(1)$','Gauss','Ångström','km/s','$(1)$','Radians','Radians','$(1)$']
+
+plt.subplots(figsize=(10,10))
+for i in range(9):
+    plt.subplot(3,3,i+1)
+    if i == 4:
+        plt.imshow(result[:,:,i],cmap='bwr',interpolation = None)
+        cbar = plt.colorbar(label=units[i])
+    elif i == 3:
+        plt.imshow(result[:,:,i],interpolation = None,vmax=0.07)
+        cbar = plt.colorbar(label=units[i])
+    elif i == 6:
+        plt.imshow(result[:,:,i],cmap = 'RdYlGn',interpolation = None)
+        cbar = plt.colorbar(label=units[i])
+    elif i == 7:
+        plt.imshow(result[:,:,i],cmap='twilight',interpolation = 'nearest')
+        cbar = plt.colorbar(label=units[i])
+    else:
+        plt.imshow(result[:,:,i],interpolation = None)
+        cbar = plt.colorbar(label=units[i])
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.title(name[i])
+plt.subplots_adjust(hspace = 0.3,wspace=0.6)
+plt.savefig('resultfinal.pdf')
+plt.show()
+
+#%%
 
 plt.imshow(result[:,:,0],interpolation = None)
 plt.xlabel('x')
