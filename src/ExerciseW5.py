@@ -433,6 +433,21 @@ np.save('resultetachange.npy',result)
 #%%
 from scipy import ndimage
 
+def make_colormap(seq):
+    seq = [(None,) * 3, 0.0] + list(seq) + [1.0, (None,) * 3]
+    cdict = {'red': [], 'green': [], 'blue': []}
+    for i, item in enumerate(seq):
+        if isinstance(item, float):
+            r1, g1, b1 = seq[i - 1]
+            r2, g2, b2 = seq[i + 1]
+            cdict['red'].append([item, r1, r2])
+            cdict['green'].append([item, g1, g2])
+            cdict['blue'].append([item, b1, b2])
+    return mcolors.LinearSegmentedColormap('CustomMap', cdict)
+import matplotlib.colors as mcolors
+c = mcolors.ColorConverter().to_rgb
+phimap = make_colormap([c('white'), c('tomato'), 0.33, c('tomato'), c('deepskyblue'), 0.66, c('deepskyblue'), c('white')])
+
 result = np.load('result.npy')
 
 name = ['$S_1$','$S_0$','$B$','$\Delta\lambda_D$','$v_{LOS}$','$a_D$',r'$\theta$',r'$\chi$','$\eta_0$']
@@ -451,8 +466,23 @@ for i in range(9):
         plt.imshow(result[:,:,i],cmap = 'RdYlGn',interpolation = None)
         cbar = plt.colorbar(label=units[i])
     elif i == 7:
-        plt.imshow(result[:,:,i],cmap='twilight',interpolation = 'nearest')
+        plt.imshow(result[:,:,i],cmap=phimap,interpolation = 'nearest')
         cbar = plt.colorbar(label=units[i])
+        Y, X = np.mgrid[0:result.shape[0]:result.shape[0]*1j, 0:result.shape[1]:result.shape[1]*1j]
+
+        toadd = +45*np.pi/180. # Reference system of the azimuth towards North
+        # Some smoothing or it will have artifacts in noisy areas
+        A = ndimage.gaussian_filter(np.sin(2*result[:,:,i]+ toadd), 5)
+        B = ndimage.gaussian_filter(np.cos(2*result[:,:,i]+ toadd), 5)
+        uvmap = (np.arctan2(A,B)% (2*np.pi) )/2.
+
+
+        U = np.sin(uvmap)
+        V = np.cos(uvmap)
+
+        plt.streamplot(X, Y, U, V, density=[2.0,2.0],linewidth=0.5,color ='k',arrowsize = 1e-7,maxlength=0.5)
+        plt.xlim(0,result.shape[1])
+        plt.ylim(result.shape[0],0)
     else:
         plt.imshow(result[:,:,i],interpolation = None)
         cbar = plt.colorbar(label=units[i])
@@ -465,6 +495,21 @@ plt.show()
 
 #%%
 from scipy import ndimage
+
+def make_colormap(seq):
+    seq = [(None,) * 3, 0.0] + list(seq) + [1.0, (None,) * 3]
+    cdict = {'red': [], 'green': [], 'blue': []}
+    for i, item in enumerate(seq):
+        if isinstance(item, float):
+            r1, g1, b1 = seq[i - 1]
+            r2, g2, b2 = seq[i + 1]
+            cdict['red'].append([item, r1, r2])
+            cdict['green'].append([item, g1, g2])
+            cdict['blue'].append([item, b1, b2])
+    return mcolors.LinearSegmentedColormap('CustomMap', cdict)
+import matplotlib.colors as mcolors
+c = mcolors.ColorConverter().to_rgb
+phimap = make_colormap([c('white'), c('tomato'), 0.33, c('tomato'), c('deepskyblue'), 0.66, c('deepskyblue'), c('white')])
 
 result = np.load('resultetachange.npy')
 
@@ -484,8 +529,23 @@ for i in range(9):
         plt.imshow(result[:,:,i],cmap = 'RdYlGn',interpolation = None)
         cbar = plt.colorbar(label=units[i])
     elif i == 7:
-        plt.imshow(result[:,:,i],cmap='twilight',interpolation = 'nearest')
+        plt.imshow(result[:,:,i],cmap=phimap,interpolation = 'nearest')
         cbar = plt.colorbar(label=units[i])
+        Y, X = np.mgrid[0:result.shape[0]:result.shape[0]*1j, 0:result.shape[1]:result.shape[1]*1j]
+
+        toadd = +45*np.pi/180. # Reference system of the azimuth towards North
+        # Some smoothing or it will have artifacts in noisy areas
+        A = ndimage.gaussian_filter(np.sin(2*result[:,:,i]+ toadd), 5)
+        B = ndimage.gaussian_filter(np.cos(2*result[:,:,i]+ toadd), 5)
+        uvmap = (np.arctan2(A,B)% (2*np.pi) )/2.
+
+
+        U = np.sin(uvmap)
+        V = np.cos(uvmap)
+
+        plt.streamplot(X, Y, U, V, density=[2.0,2.0],linewidth=0.5,color ='k',arrowsize = 1e-7,maxlength=0.5)
+        plt.xlim(0,result.shape[1])
+        plt.ylim(result.shape[0],0)
     else:
         plt.imshow(result[:,:,i],interpolation = None)
         cbar = plt.colorbar(label=units[i])
@@ -569,6 +629,23 @@ plt.colorbar()
 plt.savefig('eta_0_max50.pdf')
 plt.show()
 # %%
+from scipy import ndimage
+
+def make_colormap(seq):
+    seq = [(None,) * 3, 0.0] + list(seq) + [1.0, (None,) * 3]
+    cdict = {'red': [], 'green': [], 'blue': []}
+    for i, item in enumerate(seq):
+        if isinstance(item, float):
+            r1, g1, b1 = seq[i - 1]
+            r2, g2, b2 = seq[i + 1]
+            cdict['red'].append([item, r1, r2])
+            cdict['green'].append([item, g1, g2])
+            cdict['blue'].append([item, b1, b2])
+    return mcolors.LinearSegmentedColormap('CustomMap', cdict)
+import matplotlib.colors as mcolors
+c = mcolors.ColorConverter().to_rgb
+phimap = make_colormap([c('white'), c('tomato'), 0.33, c('tomato'), c('deepskyblue'), 0.66, c('deepskyblue'), c('white')])
+
 resultnosmooth = np.load('resultnosmooth.npy')
 
 name = ['$S_1$','$S_0$','$B$','$\Delta\lambda_D$','$v_{LOS}$','$a_D$',r'$\theta$',r'$\chi$','$\eta_0$']
@@ -590,8 +667,23 @@ for i in range(9):
         plt.imshow(resultnosmooth[:,:,i],cmap = 'RdYlGn',interpolation = None)
         cbar = plt.colorbar(label=units[i])
     elif i == 7:
-        plt.imshow(resultnosmooth[:,:,i],cmap='twilight',interpolation = 'nearest')
+        plt.imshow(result[:,:,i],cmap=phimap,interpolation = 'nearest')
         cbar = plt.colorbar(label=units[i])
+        Y, X = np.mgrid[0:result.shape[0]:result.shape[0]*1j, 0:result.shape[1]:result.shape[1]*1j]
+
+        toadd = +45*np.pi/180. # Reference system of the azimuth towards North
+        # Some smoothing or it will have artifacts in noisy areas
+        A = ndimage.gaussian_filter(np.sin(2*result[:,:,i]+ toadd), 5)
+        B = ndimage.gaussian_filter(np.cos(2*result[:,:,i]+ toadd), 5)
+        uvmap = (np.arctan2(A,B)% (2*np.pi) )/2.
+
+
+        U = np.sin(uvmap)
+        V = np.cos(uvmap)
+
+        plt.streamplot(X, Y, U, V, density=[2.0,2.0],linewidth=0.5,color ='k',arrowsize = 1e-7,maxlength=0.5)
+        plt.xlim(0,result.shape[1])
+        plt.ylim(result.shape[0],0)
     else:
         plt.imshow(result[:,:,i],interpolation = None)
         cbar = plt.colorbar(label=units[i])
