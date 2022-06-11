@@ -74,7 +74,7 @@ for i in range(4):
     plt.xlabel('$\lambda \; (Å)$')
     plt.ylabel(Stokeslabel[i])
     plt.legend(prop = {'size':4})
-plt.subplots_adjust(wspace = space + 0.1, hspace = space)
+plt.subplots_adjust(wspace = space + 0.1, hspace = space+0.2)
 plt.suptitle('Different magnetic field')
 plt.savefig('ExerciseW3_3.pdf')
 plt.show()
