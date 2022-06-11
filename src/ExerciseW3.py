@@ -70,7 +70,7 @@ for i in range(4):
     plt.plot(x-6301.5,UR3lst[i],label=Stokeslabel[i]+', B=10G')
     plt.plot(x-6301.5,URlst[i],label=Stokeslabel[i]+', B=1000')
     plt.plot(x-6301.5,UR3000lst[i],label=Stokeslabel[i]+', B=10000G')
-    plt.plot(x-6301.5,UR10000lst[i],label=Stokeslabel[i]+', B=10000G but 5D2-7D3')
+    #plt.plot(x-6301.5,UR10000lst[i],label=Stokeslabel[i]+', B=10000G but 5D2-7D3')
     plt.xlabel('$\lambda-\lambda_0 \; (Å)$')
     plt.ylabel(Stokeslabel[i])
     plt.legend(prop = {'size':4})
