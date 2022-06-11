@@ -212,7 +212,7 @@ for i in range(4):
     plt.plot(x,URv20lst[i],label = '$v_{LOS}$=20km/s, '+Stokeslabel[i])
     plt.plot(x,URvm1lst[i],label = '$v_{LOS}$=-1km/s, '+Stokeslabel[i])
     plt.plot(x,URvm20lst[i],label = '$v_{LOS}$=-20km/s, '+Stokeslabel[i])
-    plt.xlabel('Wavelength')
+    plt.xlabel('$\lambda \; (Å)$')
     plt.ylabel(Stokeslabel[i])
     plt.legend(prop = {'size':4})
 plt.subplots_adjust(wspace = space + 0.1, hspace = space)
