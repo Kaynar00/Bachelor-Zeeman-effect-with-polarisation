@@ -129,7 +129,7 @@ for i in range(4):
     plt.xlabel('$\lambda \; (Å)$')
     plt.ylabel(Stokeslabel[i])
     plt.legend(prop = {'size':4},loc=4)
-plt.subplots_adjust(wspace = space + 0.1, hspace = space)
+plt.subplots_adjust(wspace = space + 0.1, hspace = space+0.2)
 plt.suptitle('Different azimuth angles')
 plt.savefig('ExerciseW3_4.pdf')
 plt.show()
