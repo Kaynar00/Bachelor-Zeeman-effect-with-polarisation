@@ -185,6 +185,7 @@ URv1lst = [Iv1,Qv1,Uv1,Vv1]
 URv20lst = [Iv20,Qv20,Uv20,Vv20]
 URvm1lst = UR(a,b,B,x,l_0,ddopller,-1,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2)
 URvm20lst = UR(a,b,B,x,l_0,ddopller,-20,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2)
+URvm10lst = UR(a,b,B,x,l_0,ddopller,-10,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2)
 
 #Changing ddopller
 Idopller01,Qdopller01,Udopller01,Vdopller01 = UR(a,b,B,x,l_0,0.1,10,0.05,m.radians(45),m.radians(30),10,2,2,1,2,2,2)
@@ -208,14 +209,15 @@ URa1lst = [Ia1,Qa1,Ua1,Va1]
 for i in range(4):
     plt.subplot(2,2,i+1)
     plt.plot(x,URlst[i],label='$v_{LOS}$=10km/s, '+Stokeslabel[i])
-    plt.plot(x,URv1lst[i],label = '$v_{LOS}$=1km/s, '+Stokeslabel[i])
+    #plt.plot(x,URv1lst[i],label = '$v_{LOS}$=1km/s, '+Stokeslabel[i])
     plt.plot(x,URv20lst[i],label = '$v_{LOS}$=20km/s, '+Stokeslabel[i])
-    plt.plot(x,URvm1lst[i],label = '$v_{LOS}$=-1km/s, '+Stokeslabel[i])
+    #plt.plot(x,URvm1lst[i],label = '$v_{LOS}$=-1km/s, '+Stokeslabel[i])
+    plt.plot(x,URvm10lst[i],label = '$v_{LOS}$=-10km/s, '+Stokeslabel[i])
     plt.plot(x,URvm20lst[i],label = '$v_{LOS}$=-20km/s, '+Stokeslabel[i])
     plt.xlabel('$\lambda \; (Å)$')
     plt.ylabel(Stokeslabel[i])
     plt.legend(prop = {'size':4})
-plt.subplots_adjust(wspace = space + 0.1, hspace = space)
+plt.subplots_adjust(wspace = space + 0.1, hspace = space+0.2)
 plt.suptitle('Changing $v_{LOS}$')
 plt.savefig('Changing_v_LOS.pdf')
 plt.show()
