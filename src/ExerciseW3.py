@@ -75,7 +75,7 @@ for i in range(4):
     plt.ylabel(Stokeslabel[i])
     plt.legend(prop = {'size':4})
 plt.subplots_adjust(wspace = space + 0.1, hspace = space)
-plt.suptitle('Changing the magnetic field')
+plt.suptitle('Different magnetic field')
 plt.savefig('ExerciseW3_3.pdf')
 plt.show()
 
@@ -130,7 +130,7 @@ for i in range(4):
     plt.ylabel(Stokeslabel[i])
     plt.legend(prop = {'size':4},loc=4)
 plt.subplots_adjust(wspace = space + 0.1, hspace = space)
-plt.suptitle('Changing $\chi$')
+plt.suptitle('Different azimuth angles')
 plt.savefig('ExerciseW3_4.pdf')
 plt.show()
 
@@ -164,7 +164,7 @@ for i in range(4):
     plt.ylabel(Stokeslabel[i])
     plt.legend(prop = {'size':3})
 plt.subplots_adjust(wspace = space + 0.1, hspace = space + 0.1)
-plt.suptitle('Changing $\Theta$')
+plt.suptitle('Different inclination angles')
 plt.savefig('ExerciseW3_5.pdf')
 plt.show()
 
@@ -244,8 +244,8 @@ for i in range(4):
     plt.xlabel('$\lambda \; (Å)$')
     plt.ylabel(Stokeslabel[i])
     plt.legend(prop = {'size':4})
-plt.subplots_adjust(wspace = space + 0.1, hspace = space)
-plt.suptitle('Changing damping')
+plt.subplots_adjust(wspace = space + 0.1, hspace = space + 0.2)
+plt.suptitle('Different damping')
 plt.savefig('Changing_damping.pdf')
 plt.show()
 
